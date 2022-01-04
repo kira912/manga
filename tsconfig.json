@@ -1,0 +1,41 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "outDir": "root-dist",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "removeComments": true,
+    "declaration": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@/*": [
+        "src/frontend/vuejs/src/*"
+      ]
+    }
+  },
+  "exclude": [
+    "build",
+    "dist",
+    "node_modules",
+    "_"
+  ]
+}
