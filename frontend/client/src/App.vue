@@ -12,7 +12,7 @@
               <div class="flex space-x-4">
                 <router-link to="/anime" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Anime</router-link>
                 <router-link to="/scan" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Scan</router-link>
-                <router-link to="/wishlist" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Liste personnel</router-link>
+                <!-- <router-link to="/wishlist" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Liste personnel</router-link> -->
               </div>
             </div>
           </div>
@@ -20,7 +20,9 @@
       </div>
     </nav>
   </div>
-  <router-view />
+  <suspense>
+    <router-view />
+  </suspense>
 </div>
 </template>
 

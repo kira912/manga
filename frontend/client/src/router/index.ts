@@ -8,8 +8,9 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   { path: '/anime', name: 'AnimePage', component: () => import('../app/anime/views/Home.vue') },
-  { path: '/anime/:id', name: 'AnimeDetail', component: () => import('../app/anime/views/Home.vue') },
+  { path: '/anime/:id', name: 'AnimeEpisodesDetail', component: () => import('../app/anime/views/AnimeDetails.vue') },
   { path: '/scan', name: 'ScanPage', component: () => import('../app/scan/views/Home.vue') },
+  { path: '/scan/:id', name: 'AnimeScanDetail', component: () => import('../app/scan/views/AnimeScanDetails.vue') },
 ];
 
 const router = createRouter({
