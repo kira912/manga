@@ -1,11 +1,15 @@
+import { Episode } from "manga/domain/Anime/Entity/Episode";
+import { GetAnimeEpisodesPresenterInterface } from "manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodesPresenterInterface";
+import { GetAnimeEpisodesResponse } from "manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodesResponse";
 import { Anime } from "../../../manga/domain/Anime/Entity/Anime";
 import { GetAllAnimePresenterInterface } from "../../../manga/domain/Anime/UseCase/GetAllAnime/GetAllAnimePresenterInterface";
 import { GetAllAnimeResponse } from "../../../manga/domain/Anime/UseCase/GetAllAnime/GetAllAnimeResponse";
 import { AnimeUI } from "./AnimeUI";
-import { ViewModel, AnimeViewModel } from "./ViewModel";
+import { ViewModel, AnimeViewModel, AnimeEpisodesViewModel } from "./ViewModel";
 
-export class AnimeUIPresenter implements AnimeUI, GetAllAnimePresenterInterface {
+export class AnimeUIPresenter implements GetAllAnimePresenterInterface, GetAnimeEpisodesPresenterInterface, AnimeUI {
   private animes: Anime[] = [];
+  private episodes: Episode[] = [];
   private _viewModel = new ViewModel();
 
   get viewModel() {
@@ -17,15 +21,30 @@ export class AnimeUIPresenter implements AnimeUI, GetAllAnimePresenterInterface 
     this.updateAnimeViewModel();
   }
 
+  presentAnimeEpisodes(response: GetAnimeEpisodesResponse): void {
+    this.episodes = response.episodes;
+    this.updateAnimeEpisodeViewModel()
+  }
+
   private updateAnimeViewModel() {
-    this._viewModel.animes = this.animes.map(anime => {
+    this.viewModel.animes = this.animes.map(anime => {
       return new AnimeViewModel(
         anime.id,
-        anime.type,
         anime.description,
-        anime.synopsis,
         anime.name,
-        anime.image
+        '',
+        anime.image,
+      );
+    })
+  }
+
+  private updateAnimeEpisodeViewModel() {
+    this.viewModel.episodes = this.episodes.map(episode => {
+      return new AnimeEpisodesViewModel(
+        episode.name,
+        episode.site,
+        episode.url,
+        episode.image,
       );
     })
   }

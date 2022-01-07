@@ -1,9 +1,8 @@
 export class Episode {
   constructor(
-    public readonly id: string,
-    public readonly type: string,
-    public readonly description: string,
-    public readonly title: string,
+    public readonly name: string,
+    public readonly site: string,
+    public readonly url: string,
     public readonly image: string) {
 
   }

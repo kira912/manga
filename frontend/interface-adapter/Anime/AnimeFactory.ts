@@ -4,6 +4,7 @@ import { EventDispatcher } from '../../../manga/shared-kernel';
 import { AnimeUI } from './AnimeUI';
 import { AnimeUIPresenter } from './AnimeUIPresenter';
 import { AnimeController } from './AnimeController';
+import { GetAnimeEpisodes } from '../../../manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodes';
 
 export class AnimeFactory {
   private instances: any = {};
@@ -23,7 +24,9 @@ export class AnimeFactory {
       'AnimeController',
       () => new AnimeController(
         new GetAllAnime(this.mangaApi),
+        new GetAnimeEpisodes(this.mangaApi),
         this.presenter,
+        this.presenter
       ),
     );
   }

@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <anime-list-view></anime-list-view>
+  <component :is="AnimeListView" routerName="AnimeEpisodesDetail" urlParamKey="id"></component>
 </template>
