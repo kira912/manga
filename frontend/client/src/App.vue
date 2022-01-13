@@ -20,9 +20,7 @@
       </div>
     </nav>
   </div>
-  <suspense>
-    <router-view />
-  </suspense>
+  <router-view />
 </div>
 </template>
 

@@ -1,4 +1,4 @@
-import { AnimeScrapperInterface } from 'manga/domain/Anime/UseCase/AnimeScrapperInterface';
+import { AnimeScrapperInterface } from '../AnimeScrapperInterface';
 import { GetScanChaptersPresenterInterface } from './GetScanChaptersPresenterInterface';
 import { GetScanChaptersRequest } from './GetScanChaptersRequest';
 import { GetScanChaptersResponse } from './GetScanChaptersResponse';

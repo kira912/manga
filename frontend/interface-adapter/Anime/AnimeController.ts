@@ -1,8 +1,10 @@
-import { GetAllAnimePresenterInterface } from "../../../manga/domain/Anime/UseCase/GetAllAnime/GetAllAnimePresenterInterface";
-import { GetAllAnime } from "../../../manga/domain/Anime/UseCase/GetAllAnime/GetAllAnime";
-import { GetAnimeEpisodes } from "manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodes";
-import { GetAnimeEpisodesPresenterInterface } from "manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodesPresenterInterface";
-import { GetAnimeEpisodeRequest } from "../../../manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodeRequest";
+import {
+  GetAllAnime,
+  GetAnimeEpisodes,
+  GetAnimeEpisodesPresenterInterface,
+  GetAllAnimePresenterInterface,
+  GetAnimeEpisodeRequest
+} from "../../../manga/domain";
 
 export class AnimeController {
   constructor(
@@ -12,11 +14,11 @@ export class AnimeController {
     private getAnimeEpisodePresenter: GetAnimeEpisodesPresenterInterface) {
   }
 
-  async refreshSummary() {
+  async getAllAnimes() {
     await this.getAllAnime.execute(this.getAllAnimePresenter)
   }
 
-  getEpisodes(animeId: string) {
-    this.getAnimeEpisodes.execute(new GetAnimeEpisodeRequest(animeId), this.getAnimeEpisodePresenter);
+  async getEpisodes(animeId: number) {
+    await this.getAnimeEpisodes.execute(new GetAnimeEpisodeRequest(animeId), this.getAnimeEpisodePresenter);
   }
 }

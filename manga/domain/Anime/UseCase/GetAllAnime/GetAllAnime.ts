@@ -7,7 +7,9 @@ export class GetAllAnime {
 
   async execute(presenter: GetAllAnimePresenterInterface) {
     const response = new GetAllAnimeResponse();
-    response.animes = await this.mangaApi.getAllAnime();
-    presenter.presentAllAnime(response);
+    response.animes = await this.mangaApi.getAll();
+    console.log(response.animes);
+    
+    presenter.presentGetAllAnime(response);
   }
 }

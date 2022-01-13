@@ -2,7 +2,7 @@ import { Anime } from "../Entity/Anime";
 import { Episode } from "../Entity/Episode";
 
 export interface AnimeApiInterface {
-  getAllAnime(): Promise<Anime[]>;
+  getAll(): Promise<Anime[]>;
 
-  getAnimeEpisodes(animeId: string): Promise<Episode[]>;
+  getAnimeEpisodes(animeId: number): Promise<Episode[]>;
 }

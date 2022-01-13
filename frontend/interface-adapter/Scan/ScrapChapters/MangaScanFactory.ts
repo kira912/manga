@@ -1,21 +1,18 @@
-import { EventDispatcher } from '../../../manga/shared-kernel';
-import { AnimeUI } from './AnimeUI';
-import { AnimeScrapperInterface } from '../../../../manga/domain/Anime/UseCase/AnimeScrapperInterface';
+import { MangaScanUI } from './MangaScanUI';
 import { MangaScanController } from './MangaScanController';
-import { GetScanChapters } from '../../../../manga/domain/Scan/UseCase/GetScanChapters/GetScanChapters';
+import { GetScanChapters, AnimeScrapperInterface } from '../../../../manga/domain';
 import { MangaScanUIPresenter } from './MangaScanUIPresenter';
-import { GetScanChapterPage } from '../../../../manga/domain/Scan/UseCase/GetChapterPages/GetScanChapterPage';
 
 export class MangaScanFactory {
   private instances: any = {};
 
-  constructor(private eventDispatcher: EventDispatcher, private mangaScrapper: AnimeScrapperInterface) {}
+  constructor(private mangaScrapper: AnimeScrapperInterface) {}
 
   get viewModel() {
     return this.presenter.viewModel;
   }
 
-  get ui(): AnimeUI {
+  get ui(): MangaScanUI {
     return this.presenter;
   }
 
@@ -24,14 +21,12 @@ export class MangaScanFactory {
       'MangaScanController',
       () => new MangaScanController(
         new GetScanChapters(this.mangaScrapper),
-        new GetScanChapterPage(this.mangaScrapper),
-        this.presenter,
         this.presenter,
       ),
     );
   }
 
-  get presenter() {
+  get presenter(): MangaScanUIPresenter {
     return this.reuseOrInstantiate(
       'MangaScanPresenter',
       () => new MangaScanUIPresenter(),

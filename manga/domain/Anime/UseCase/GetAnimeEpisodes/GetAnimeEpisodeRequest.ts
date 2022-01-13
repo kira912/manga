@@ -1,3 +1,3 @@
 export class GetAnimeEpisodeRequest {
-    constructor(public readonly animeId: string) {}
+    constructor(public readonly animeId: number) {}
 }

@@ -1,4 +1,4 @@
-import { AnimeScrapperInterface } from '../../../../../manga/domain/Anime/UseCase/AnimeScrapperInterface';
+import { AnimeScrapperInterface } from '../../../../../manga/domain';
 import { GetScanChapterPagePresenterInterface } from './GetScanChapterPagePresenterInterface';
 import { GetScanChapterPageRequest } from './GetScanChapterPageRequest';
 import { GetScanChapterPageResponse } from './GetScanChapterPageResponse';
@@ -8,7 +8,7 @@ export class GetScanChapterPage {
 
   async execute(request: GetScanChapterPageRequest, presenter: GetScanChapterPagePresenterInterface) {
     const response = new GetScanChapterPageResponse();
-    response.pages = await this.mangaScrapper.scrapChapterPages(request.bookLink);
+    response.pages = await this.mangaScrapper.scrapChapterPages(request.bookId);
     presenter.presentChapterPages(response);
   }
 }

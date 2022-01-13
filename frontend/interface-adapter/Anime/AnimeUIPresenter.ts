@@ -1,13 +1,15 @@
-import { Episode } from "manga/domain/Anime/Entity/Episode";
-import { GetAnimeEpisodesPresenterInterface } from "manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodesPresenterInterface";
-import { GetAnimeEpisodesResponse } from "manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodesResponse";
-import { Anime } from "../../../manga/domain/Anime/Entity/Anime";
-import { GetAllAnimePresenterInterface } from "../../../manga/domain/Anime/UseCase/GetAllAnime/GetAllAnimePresenterInterface";
-import { GetAllAnimeResponse } from "../../../manga/domain/Anime/UseCase/GetAllAnime/GetAllAnimeResponse";
+import {
+  Anime,
+  Episode,
+  GetAnimeEpisodesPresenterInterface,
+  GetAllAnimePresenterInterface,
+  GetAllAnimeResponse,
+  GetAnimeEpisodesResponse
+} from "../../../manga/domain";
 import { AnimeUI } from "./AnimeUI";
 import { ViewModel, AnimeViewModel, AnimeEpisodesViewModel } from "./ViewModel";
 
-export class AnimeUIPresenter implements GetAllAnimePresenterInterface, GetAnimeEpisodesPresenterInterface, AnimeUI {
+export class AnimeUIPresenter implements AnimeUI, GetAllAnimePresenterInterface, GetAnimeEpisodesPresenterInterface {
   private animes: Anime[] = [];
   private episodes: Episode[] = [];
   private _viewModel = new ViewModel();
@@ -16,7 +18,7 @@ export class AnimeUIPresenter implements GetAllAnimePresenterInterface, GetAnime
     return this._viewModel;
   }
 
-  presentAllAnime(response: GetAllAnimeResponse): void {
+  presentGetAllAnime(response: GetAllAnimeResponse): void {
     this.animes = response.animes;
     this.updateAnimeViewModel();
   }
@@ -32,7 +34,6 @@ export class AnimeUIPresenter implements GetAllAnimePresenterInterface, GetAnime
         anime.id,
         anime.description,
         anime.name,
-        '',
         anime.image,
       );
     })

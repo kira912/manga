@@ -1,7 +1,9 @@
-<script setup lang="ts">
-  import AnimeListView from '../../anime/components/AnimeListView.vue';
-</script>
-
 <template>
-  <component :is="AnimeListView" routerName="AnimeScanDetail" urlParamValue="mangaName"></component>
+<div>
+  <GetAllAnimeView routerName="AnimeScanDetail" />
+</div>
 </template>
+
+<script setup lang="ts">
+  import GetAllAnimeView from '../../anime/components/GetAllAnimeView.vue'
+</script>

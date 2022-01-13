@@ -1,0 +1,4 @@
+export enum MutationTypes {
+  SET_ALL_ANIME = "SET_ALL_ANIME",
+  SET_ANIME_EPISODES = "SET_ANIME_EPISODES",
+}

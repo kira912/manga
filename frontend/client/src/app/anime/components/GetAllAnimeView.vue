@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap">
     <router-link
-      v-for="anime in viewModel.animes"
+      v-for="anime in store.getters.getAll"
       :key="anime.id"
       :to="{name: props.routerName, params: {id: route.name === 'ScanPage' ? anime.name.split(' ').join('-').toLowerCase() : anime.id}}"
     >
@@ -23,22 +23,19 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from "@vue/runtime-core";
-import { AnimeFactory } from '../../../../../interface-adapter';
-import { inject } from 'vue'
+import { onBeforeMount } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
+import { AllActionTypes } from "../../../store/action-types";
+const store = useStore();
 
-const $anime: AnimeFactory | undefined = inject('anime');
-const viewModel = $anime.viewModel;
-
-onMounted(async () => {
-  await $anime.controller.refreshSummary();
+onBeforeMount(async () => {
+  await store.dispatch(AllActionTypes.GET_ALL_ANIME);
 })
 
-const route = useRoute()
-
+const route = useRoute();
 const props = defineProps({
   routerName: String,
-  urlParamValue: String,
 })
+
 </script>

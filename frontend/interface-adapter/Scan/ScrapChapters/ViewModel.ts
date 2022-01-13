@@ -1,19 +1,14 @@
-import { Episode } from "manga/domain/Anime/Entity/Episode";
-import { Chapter } from "manga/domain/Scan/Entity/Chapter";
-import { Page } from "manga/domain/Scan/Entity/Page";
-
 export class ScanChaptersViewModel {
   constructor(
     public readonly id: string,
       public readonly name: string,
-      public readonly bookUrl: string,
-      public readonly pages: Page[]
+      public readonly bookId: string
   ) { }
 }
 
 export class ScanChapterPagesViewModel {
   constructor(
-    public readonly id: number,
+    public readonly id: string,
     public readonly url: string) { }
 }
 

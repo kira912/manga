@@ -1,7 +1,7 @@
 <template>
-  <anime-list-view></anime-list-view>
+  <GetAllAnimeView />
 </template>
 
 <script setup lang="ts">
-  import AnimeListView from './anime/components/AnimeListView.vue';
+import GetAllAnimeView from "./anime/components/GetAllAnimeView.vue";
 </script>

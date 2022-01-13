@@ -1,0 +1,4 @@
+export enum ActionTypes {
+  GET_ALL_ANIME = "GET_ALL_ANIME",
+  GET_ANIME_EPISODE = "GET_ANIME_EPISODE"
+}

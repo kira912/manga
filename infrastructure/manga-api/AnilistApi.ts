@@ -1,11 +1,9 @@
-import { AnimeApiInterface } from "../../manga/domain/Anime/UseCase/AnimeApiInterface";
-import { Anime } from '../../manga/domain/Anime/Entity/Anime';
-import { Episode } from "../../manga/domain/Anime/Entity/Episode";
+import { Anime, Episode, AnimeApiInterface } from '../../manga/domain';
 
 export class AnilistApi implements AnimeApiInterface {
   private baseUri = "https://graphql.anilist.co";
 
-  async getAllAnime(): Promise<Anime[]> {
+  async getAll(): Promise<Anime[]> {
     const query = `
       query ($page: Int, $perPage: Int) {
         Page(page: $page, perPage: $perPage) {
@@ -50,7 +48,7 @@ export class AnilistApi implements AnimeApiInterface {
       return [];
     }
 
-    const animes = Array();
+    const animes: Anime[] = [];
     const response = await result.json();
 
     for (const data of response.data.Page.media) {
@@ -58,7 +56,6 @@ export class AnilistApi implements AnimeApiInterface {
         data.id,
         data.description,
         data.title.english,
-        data.slug,
         data.coverImage.medium
       ));
     }
@@ -66,10 +63,10 @@ export class AnilistApi implements AnimeApiInterface {
     return animes;
   }
 
-  async getAnimeEpisodes(animeId: string): Promise<Episode[]> {
+  async getAnimeEpisodes(animeId: number): Promise<Episode[]> {
     const query = `
       query ($animeId: Int) {
-        Media(id: $animeId, type: ANIME, sort: FAVOURITES_DESC) {
+        Media(id: $animeId, type: ANIME) {
           id
           description
           coverImage {
@@ -105,15 +102,18 @@ export class AnilistApi implements AnimeApiInterface {
     };
       
     const result = await fetch(this.baseUri, options)
-
+    
     if (result.status !== 200) {
       return [];
     }
 
-    const animeEpisodes = Array();
+    const animeEpisodes: Episode[] = [];
     const response = await result.json();
+    console.log(response);
+    
     
     for (const data of response.data.Media.streamingEpisodes) {
+      // console.log(data);
       animeEpisodes.push(new Episode(
         data.title,
         data.site,
@@ -121,7 +121,7 @@ export class AnilistApi implements AnimeApiInterface {
         data.thumbnail
       ));
     }
-
+    
     return animeEpisodes;
   }
 }

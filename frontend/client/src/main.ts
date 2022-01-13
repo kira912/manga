@@ -3,5 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import './index.css'
 import factories from './plugins/factories';
+import { store } from "./store";
 
-createApp(App).use(router).use(factories).mount("#app");
+const app = createApp(App);
+app.use(router).use(factories).use(store).mount("#app");

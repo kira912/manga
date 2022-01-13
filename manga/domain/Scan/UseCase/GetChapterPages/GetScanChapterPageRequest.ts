@@ -1,3 +1,3 @@
 export class GetScanChapterPageRequest {
-    constructor(public readonly bookLink: string) {}
+    constructor(public readonly bookId: string) {}
 }

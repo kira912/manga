@@ -11,6 +11,7 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/anime/:id', name: 'AnimeEpisodesDetail', component: () => import('../app/anime/views/AnimeDetails.vue') },
   { path: '/scan', name: 'ScanPage', component: () => import('../app/scan/views/Home.vue') },
   { path: '/scan/:id', name: 'AnimeScanDetail', component: () => import('../app/scan/views/AnimeScanDetails.vue') },
+  { path: '/scan/chapter/book/:bookId', name: 'AnimeScanChapterBook', component: () => import('../app/scan/views/AnimeScanChapterBook.vue') },
 ];
 
 const router = createRouter({

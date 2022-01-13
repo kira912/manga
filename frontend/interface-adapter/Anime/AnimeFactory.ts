@@ -1,17 +1,16 @@
-import { AnimeApiInterface } from '../../../manga/domain/Anime/UseCase/AnimeApiInterface';
+import { AnimeApiInterface, GetAnimeEpisodes } from '../../../manga/domain';
 import { GetAllAnime } from '../../../manga/domain/Anime/UseCase/GetAllAnime/GetAllAnime';
-import { EventDispatcher } from '../../../manga/shared-kernel';
 import { AnimeUI } from './AnimeUI';
 import { AnimeUIPresenter } from './AnimeUIPresenter';
 import { AnimeController } from './AnimeController';
-import { GetAnimeEpisodes } from '../../../manga/domain/Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodes';
+import { ViewModel } from './ViewModel';
 
 export class AnimeFactory {
   private instances: any = {};
 
-  constructor(private eventDispatcher: EventDispatcher, private mangaApi: AnimeApiInterface) {}
+  constructor(private mangaApi: AnimeApiInterface) {}
 
-  get viewModel() {
+  get viewModel(): ViewModel {
     return this.presenter.viewModel;
   }
 
@@ -31,7 +30,7 @@ export class AnimeFactory {
     );
   }
 
-  get presenter() {
+  get presenter(): AnimeUIPresenter {
     return this.reuseOrInstantiate(
       'AnimePresenter',
       () => new AnimeUIPresenter(),
