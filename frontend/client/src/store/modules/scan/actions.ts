@@ -11,9 +11,9 @@ import { ChapterPage, ScanKey } from "../../../symbols";
 
 export const actions: ActionTree<ScanStateTypes, IRootState> &
 AnimeActionsTypes = {
-  async [ActionTypes.GET_ANIME_SCAN_CHAPTERS]({ commit }, id: number) {
+  async [ActionTypes.GET_ANIME_SCAN_CHAPTERS]({ commit }, id: string) {
     const scan = injectStrict(ScanKey);
-    await scan.controller.getChaptersList(id);
+    await scan.controller.getChapters(id);
 
     commit(MutationTypes.SET_ANIME_SCAN_CHAPTERS, scan.viewModel.chapters);
   },

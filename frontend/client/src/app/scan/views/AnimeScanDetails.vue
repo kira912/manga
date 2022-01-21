@@ -4,7 +4,7 @@
         <router-link 
           v-for="(chapter, index) in store.getters.getChapters"
           :key="index"
-          :to="{name: 'AnimeScanChapterBook', params: {bookId: chapter.bookId}}"
+          :to="{name: 'AnimeScanChapterBook', params: {bookId: viewerUrlSplitted(chapter.bookId)[viewerUrlSplitted(chapter.bookId).length - 1]}}"
           class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 hover:shadow-2xl"
         >
             <article class="overflow-hidden rounded-lg shadow-lg">
@@ -25,7 +25,11 @@ import { useStore } from 'vuex';
 import { AllActionTypes } from '../../../store/action-types';
 
 const store = useStore();
-const route = useRoute()
+const route = useRoute();
+
+const viewerUrlSplitted = (viewerUrl) => {
+  return viewerUrl.split('/')
+}
 
 onBeforeMount(async () => {
   await store.dispatch(AllActionTypes.GET_ANIME_SCAN_CHAPTERS, route.params.id);

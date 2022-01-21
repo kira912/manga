@@ -5,11 +5,11 @@ import {
     GetScanChapterPage
 } from "../manga/domain";
 import { AnilistApi } from "./manga-api/AnilistApi";
-import { MangaScanOrgScrapper } from "./scrapper/MangaScanOrgScrapper";
+import { ScanMangadexApi } from "./manga-api/ScanMangadexApi";
 
 export const anilistMangaApi = new AnilistApi();
+export const scanMangadexApi = new ScanMangadexApi();
 export const getAllAnime = new GetAllAnime(anilistMangaApi);
-export const mangaOrgScrapper = new MangaScanOrgScrapper();
 export const getAnimeEpisodes = new GetAnimeEpisodes(anilistMangaApi);
-export const getScanChapter = new GetScanChapters(mangaOrgScrapper); 
-export const getScanChapterPages = new GetScanChapterPage(mangaOrgScrapper);
+export const getScanChapter = new GetScanChapters(scanMangadexApi); 
+export const getScanChapterPages = new GetScanChapterPage(scanMangadexApi);

@@ -1,3 +1,3 @@
 export class GetScanChaptersRequest {
-    constructor(public readonly animeId: number) {}
+    constructor(public readonly animeId: string) {}
 }

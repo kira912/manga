@@ -1,12 +1,12 @@
 import { ChapterPageUI } from './ChapterPageUI';
-import { GetScanChapterPage, AnimeScrapperInterface } from '../../../../manga/domain';
+import { GetScanChapterPage, ScanApiInterface } from '../../../../manga/domain';
 import { ChapterPageController } from './ChapterPageController';
 import { ChapterPageUIPresenter } from './ChapterPageUIPresenter';
 
 export class ChapterPageFactory {
   private instances: any = {};
 
-  constructor(private mangaScrapper: AnimeScrapperInterface) {}
+  constructor(private scanApi: ScanApiInterface) {}
 
   get viewModel() {
     return this.presenter.viewModel;
@@ -20,7 +20,7 @@ export class ChapterPageFactory {
     return this.reuseOrInstantiate(
       'ChapterPageController',
       () => new ChapterPageController(
-        new GetScanChapterPage(this.mangaScrapper),
+        new GetScanChapterPage(this.scanApi),
         this.presenter,
       ),
     );

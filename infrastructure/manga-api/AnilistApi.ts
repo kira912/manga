@@ -1,35 +1,16 @@
-import { Anime, Episode, AnimeApiInterface } from '../../manga/domain';
+import { Anime, Episode, AnimeApiInterface, Chapter } from '../../manga/domain';
 
 export class AnilistApi implements AnimeApiInterface {
-  private baseUri = "https://graphql.anilist.co";
+  private baseUri = "https://api.mangadex.org";
+  private baseUriCover = "https://uploads.mangadex.org/covers";
 
   async getAll(): Promise<Anime[]> {
-    const query = `
-      query ($page: Int, $perPage: Int) {
-        Page(page: $page, perPage: $perPage) {
-          pageInfo {
-            total
-            perPage
-          }
-          media(type: ANIME, sort: FAVOURITES_DESC) {
-            id
-            description
-            coverImage {
-              medium
-            }
-            title {
-              english
-            }
-          }
-        }
-      }
-    `;
-
-    const variables = {
-      query: query,
-      page: 1,
-      perPage: 3,
-    };
+    const urlParams = {
+      "availableTranslatedLanguage[]": "fr",
+      "includes[]": "cover_art",
+      "offset": 0,
+      "limit": 100
+    }
 
     const headers = new Headers({
       "Content-Type": "application/json",
@@ -37,12 +18,11 @@ export class AnilistApi implements AnimeApiInterface {
     });
 
     const options = { 
-      method: 'POST',
+      method: 'GET',
       headers: headers,
-      body: JSON.stringify(variables),
     };
       
-    const result = await fetch(this.baseUri, options)
+    const result = await fetch(`${this.baseUri}/manga?${new URLSearchParams(urlParams)}`, options)
 
     if (result.status !== 200) {
       return [];
@@ -51,12 +31,19 @@ export class AnilistApi implements AnimeApiInterface {
     const animes: Anime[] = [];
     const response = await result.json();
 
-    for (const data of response.data.Page.media) {
+    if (response.result !== 'ok') {
+      console.error(response)
+
+      return animes;
+    }
+
+    for (const data of response.data) {
+      const covertArtRelation = data.relationships.filter(element => element.type === "cover_art")[0];
       animes.push(new Anime(
         data.id,
-        data.description,
-        data.title.english,
-        data.coverImage.medium
+        data.attributes.description.en ?? '',
+        data.attributes.title.en,
+        `${this.baseUriCover}/${data.id}/${covertArtRelation.attributes.fileName}`
       ));
     }
 

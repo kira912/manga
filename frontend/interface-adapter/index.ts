@@ -6,24 +6,23 @@ import { EventTargetEventDispatcher } from '../../infrastructure/event/EventDisp
 import { EventTarget } from 'event-target-shim';
 import { AnimeApi } from "../infrastructure/Anime/AnimeApi";
 import { MangaScanFactory } from "./Scan/ScrapChapters/MangaScanFactory";
-import { MangaScanOrgScrapper } from "../../infrastructure/scrapper/MangaScanOrgScrapper";
 import { AnimeFakeApi } from "../../frontend/infrastructure/Anime/AnimeFakeApi";
 import { ChapterPageFactory } from "./Scan/Pages/ChapterPageFactory";
+import { ScanMangadexApi } from "../../infrastructure/manga-api/ScanMangadexApi";
 
 export const eventDispatcher = new EventTargetEventDispatcher(new EventTarget());
 export const animeApi = new AnimeApi();
-export const mangaScanOrgScrapper = new MangaScanOrgScrapper();
+export const scanMangadexApi = new ScanMangadexApi();
 export const animeFakeApi = new AnimeFakeApi(animeApi);
 export const animeFactory = new AnimeFactory(animeFakeApi);
-export const mangaScanFactory = new MangaScanFactory(mangaScanOrgScrapper);
-export const chapterPageFactory = new ChapterPageFactory(mangaScanOrgScrapper);
+export const mangaScanFactory = new MangaScanFactory(scanMangadexApi);
+export const chapterPageFactory = new ChapterPageFactory(scanMangadexApi);
 
-
-export { 
+export {
     AnimeController,
     MangaScanController,
     ChapterPageController,
-    MangaScanOrgScrapper,
+    ScanMangadexApi,
     AnimeFactory,
     MangaScanFactory,
     ChapterPageFactory

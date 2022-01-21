@@ -6,7 +6,7 @@ export class ChapterPageController {
     private getChapterPagesPresenter: GetScanChapterPagePresenterInterface) {
   }
 
-  async getChapterPages(bookId: number) {
+  async getChapterPages(bookId: string) {
     await this.getScanChapterPages.execute(new GetScanChapterPageRequest(bookId), this.getChapterPagesPresenter);
   }
 }

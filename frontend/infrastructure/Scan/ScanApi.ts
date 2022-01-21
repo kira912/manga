@@ -5,10 +5,10 @@ import {
   GetScanChaptersRequest,
   GetScanChapterPagePresenterInterface,
   GetScanChapterPageResponse,
-  GetScanChapterPageRequest
+  Page,
+  GetScanChapterPageRequest,
 } from "manga/domain";
 import { Chapter } from "manga/domain/Scan/Entity/Chapter";
-import { Page } from "manga/domain/Scan/Entity/Page";
 
 export class ScanApi implements GetScanChaptersPresenterInterface, GetScanChapterPagePresenterInterface {
   getScanChaptersResponse?: GetScanChaptersResponse;
@@ -22,13 +22,13 @@ export class ScanApi implements GetScanChaptersPresenterInterface, GetScanChapte
     this.getChapterPagesResponse = response;
   }
 
-  async scrapChapters(id: number): Promise<Chapter[]> {
+  async getChapters(id: string): Promise<Chapter[]> {
     await getScanChapter.execute(new GetScanChaptersRequest(id), this);
     return this.getScanChaptersResponse!.chapters;
   }
 
-  async scrapChapterPages(bookId: string): Promise<Page[]> {
-    await getScanChapterPages.execute(new GetScanChapterPageRequest(bookId), this);
+  async getChapterPages(id: string): Promise<Page[]> {
+    await getScanChapterPages.execute(new GetScanChapterPageRequest(id), this);
     return this.getChapterPagesResponse!.pages;
   }
 }

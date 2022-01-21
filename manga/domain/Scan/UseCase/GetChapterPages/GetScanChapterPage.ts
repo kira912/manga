@@ -1,14 +1,14 @@
-import { AnimeScrapperInterface } from '../../../../../manga/domain';
+import { ScanApiInterface } from '../../../../../manga/domain';
 import { GetScanChapterPagePresenterInterface } from './GetScanChapterPagePresenterInterface';
 import { GetScanChapterPageRequest } from './GetScanChapterPageRequest';
 import { GetScanChapterPageResponse } from './GetScanChapterPageResponse';
 
 export class GetScanChapterPage {
-  constructor(private mangaScrapper: AnimeScrapperInterface) {}
+  constructor(private scanApi: ScanApiInterface) {}
 
   async execute(request: GetScanChapterPageRequest, presenter: GetScanChapterPagePresenterInterface) {
     const response = new GetScanChapterPageResponse();
-    response.pages = await this.mangaScrapper.scrapChapterPages(request.bookId);
+    response.pages = await this.scanApi.getChapterPages(request.bookId);
     presenter.presentChapterPages(response);
   }
 }

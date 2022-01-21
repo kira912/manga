@@ -1,15 +1,15 @@
 import {
     getAllAnime,
-    mangaOrgScrapper,
     getAnimeEpisodes,
     getScanChapter,
     getScanChapterPages,
+    scanMangadexApi
 } from './di'
 
 export {
     getAllAnime,
-    mangaOrgScrapper,
     getAnimeEpisodes,
     getScanChapter,
     getScanChapterPages,
+    scanMangadexApi
 }

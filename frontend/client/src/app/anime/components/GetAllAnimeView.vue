@@ -3,7 +3,7 @@
     <router-link
       v-for="anime in store.getters.getAll"
       :key="anime.id"
-      :to="{name: props.routerName, params: {id: route.name === 'ScanPage' ? anime.name.split(' ').join('-').toLowerCase() : anime.id}}"
+      :to="{name: props.routerName, params: {id: anime.id}}"
     >
       <div
         class="max-w-md p-4 m-2 pointer-events bg-white shadow-lg rounded-lg my-20 hover:shadow-2xl"

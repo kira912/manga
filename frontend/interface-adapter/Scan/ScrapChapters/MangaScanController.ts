@@ -11,7 +11,7 @@ export class MangaScanController {
     private getScanChaptersPresenter: GetScanChaptersPresenterInterface,) {
   }
 
-  async getChaptersList(animeName: number) {
-    await this.getScanChapters.execute(new GetScanChaptersRequest(animeName), this.getScanChaptersPresenter);
+  async getChapters(animeId: string) {
+    await this.getScanChapters.execute(new GetScanChaptersRequest(animeId), this.getScanChaptersPresenter);
   }
 }

@@ -1,3 +1,4 @@
+import { Chapter } from "manga/domain";
 import { Anime } from "../Entity/Anime";
 import { Episode } from "../Entity/Episode";
 

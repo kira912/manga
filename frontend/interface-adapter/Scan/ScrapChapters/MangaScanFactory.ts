@@ -1,12 +1,12 @@
 import { MangaScanUI } from './MangaScanUI';
 import { MangaScanController } from './MangaScanController';
-import { GetScanChapters, AnimeScrapperInterface } from '../../../../manga/domain';
+import { GetScanChapters, ScanApiInterface } from '../../../../manga/domain';
 import { MangaScanUIPresenter } from './MangaScanUIPresenter';
 
 export class MangaScanFactory {
   private instances: any = {};
 
-  constructor(private mangaScrapper: AnimeScrapperInterface) {}
+  constructor(private mangaApi: ScanApiInterface) {}
 
   get viewModel() {
     return this.presenter.viewModel;
@@ -20,7 +20,7 @@ export class MangaScanFactory {
     return this.reuseOrInstantiate(
       'MangaScanController',
       () => new MangaScanController(
-        new GetScanChapters(this.mangaScrapper),
+        new GetScanChapters(this.mangaApi),
         this.presenter,
       ),
     );

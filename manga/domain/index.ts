@@ -18,7 +18,7 @@ export * from "./Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodesPresenterInterfa
 export * from "./Scan/UseCase/GetScanChapters/GetScanChaptersPresenterInterface";
 export * from "./Scan/UseCase/GetChapterPages/GetScanChapterPagePresenterInterface";
 export * from "./Anime/UseCase/AnimeApiInterface";
-export * from "./Scan/UseCase/AnimeScrapperInterface";
+export * from "./Scan/UseCase/ScanApiInterface";
 
 import { GetAnimeEpisodeRequest } from "./Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodeRequest";
 import { GetScanChaptersRequest } from "./Scan/UseCase/GetScanChapters/GetScanChaptersRequest";
