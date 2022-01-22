@@ -1,4 +1,3 @@
-import { animeFactory } from "../../../../../interface-adapter";
 import { GetterTree } from "vuex";
 import {
   AnimeGettersTypes,

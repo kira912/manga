@@ -1,0 +1,5 @@
+export enum ActionTypes {
+  OPEN_MODAL = "OPEN_MODAL",
+  CLOSE_MODAL = "CLOSE_MODAL",
+  CLOSE_ALL_MODAL = "CLOSE_ALL_MODAL"
+}

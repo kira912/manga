@@ -17,7 +17,7 @@ AnimeActionsTypes = {
 
     commit(MutationTypes.SET_ANIME_SCAN_CHAPTERS, scan.viewModel.chapters);
   },
-  async [ActionTypes.GET_ANIME_SCAN_CHAPTER_PAGE]({ commit }, id: number) {
+  async [ActionTypes.GET_ANIME_SCAN_CHAPTER_PAGE]({ commit }, id: string) {
     const scan = injectStrict(ChapterPage);
     await scan.controller.getChapterPages(id)
 

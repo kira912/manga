@@ -1,24 +1,46 @@
 <template>
-  <div class="carousel">
-    <div class="inner" ref="inner" :style="innerStyles">
-      <div
-        class="card"
-        v-for="page in store.getters.getChapterPages"
-        :key="page.id"
-        ref="inner"
-      >
-        <img class="object-contain" :src="page.url" :alt="page.id" />
+  <div class="flex flex-col">
+    <div class="carousel">
+      <div class="inner" ref="inner" :style="innerStyles">
+        <div
+          class="page"
+          v-for="(page, index) in store.getters.getChapterPages"
+          :key="index"
+          ref="inner"
+        >
+          <img
+            class="aspect-auto"
+            :src="page.url"
+            :alt="page.id"
+            @click="store.dispatch(AllActionTypes.OPEN_MODAL, `page_${index}`)"
+          />
+          <GetSinglePage :url="page.url" :index="index" />
+        </div>
       </div>
     </div>
+    <div class="flex flex-wrap self-center">
+      <button
+        class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        @click="prev"
+      >
+        prev
+      </button>
+      <button
+        class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        @click="next"
+      >
+        next
+      </button>
+    </div>
   </div>
-  <button @click="prev">prev</button>
-  <button @click="next">next</button>
 </template>
 <script setup lang="ts">
+import { pre } from "restify";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { AllActionTypes } from "../../../store/action-types";
+import GetSinglePage from "./GetSinglePage.vue";
 
 const store = useStore();
 const route = useRoute();
@@ -92,6 +114,15 @@ onMounted(async () => {
     route.params.bookId
   );
 
+  window.addEventListener('keydown', (event) => {
+    if (event.which === 37) {
+      prev()
+    }
+    else if (event.which === 39) {
+      next()
+    }
+  })
+
   setStep();
   resetTranslate();
 });
@@ -106,8 +137,7 @@ onMounted(async () => {
   transition: transform 0.2s;
   white-space: nowrap;
 }
-.card {
-  margin-right: 10px;
+.page {
   display: inline-flex;
   background-color: #39b1bd;
   color: white;
@@ -115,10 +145,5 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   height: 50%;
-}
-/* optional */
-button {
-  margin-right: 5px;
-  margin-top: 10px;
 }
 </style>
