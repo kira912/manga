@@ -1,11 +1,11 @@
 import { Module } from "vuex";
-import { ScanStateTypes, IRootState } from "../../interfaces";
+import { State } from "./interface";
 import { getters } from "./getters";
 import { actions } from "./actions";
 import { mutations } from "./mutations";
 import { state } from "./state";
 
-const anime: Module<ScanStateTypes, IRootState> = {
+const anime: Module<State, State> = {
   state,
   getters,
   mutations,

@@ -1,6 +1,6 @@
-import { ScanStateTypes } from "../../interfaces";
+import { State } from "./interface";
 
-export const state: ScanStateTypes = {
+export const state: State = {
   chapters: [],
   pages: [],
 };

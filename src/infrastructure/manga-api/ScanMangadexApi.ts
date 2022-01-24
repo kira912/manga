@@ -52,14 +52,11 @@ export class ScanMangadexApi implements ScanApiInterface {
       );
     }
 
-    console.log(chapters);
-    
     return chapters;
   }
 
   async getChapterPages(viewerId: string): Promise<Page[]> {
     const pages: Page[] = [];
-    console.log(viewerId);
 
     const urlParams = {
       chapter_id: viewerId,
@@ -69,12 +66,12 @@ export class ScanMangadexApi implements ScanApiInterface {
 
     const headers = new Headers({
       'Content-Type': 'application/json',
-      Accept: 'application/json',
+      'Accept': 'application/json',
     });
 
     const options = {
       method: 'GET',
-      headers: headers,
+      headers,
     };
 
     const result = await fetch(

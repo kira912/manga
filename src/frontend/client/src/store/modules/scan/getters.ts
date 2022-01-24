@@ -1,16 +1,15 @@
 import { GetterTree } from "vuex";
 import {
-  ScanGettersTypes,
-  ScanStateTypes,
-  IRootState
-} from "../../interfaces";
+  GettersTypes,
+  State
+} from "./interface";
 
-export const getters: GetterTree<ScanGettersTypes, IRootState> &
-ScanGettersTypes = {
-  getChapters: (state: ScanStateTypes) => {
+export const getters: GetterTree<GettersTypes, State> &
+GettersTypes = {
+  getChapters: (state: State) => {
     return state.chapters || [];
   },
-  getChapterPages: (state: ScanStateTypes) => {
+  getChapterPages: (state: State) => {
     return state.pages || [];
   },
 };

@@ -14,7 +14,6 @@ ActionsTypes = {
   async [ActionTypes.GET_ALL_ANIME]({ commit }) {
     const anime = injectStrict(AnimeKey);
     await anime.controller.getAllAnimes();
-
     commit(MutationTypes.SET_ALL_ANIME, anime.viewModel.animes);
   },
   async [ActionTypes.GET_ANIME_EPISODE]({ commit }, id: number) {
@@ -25,9 +24,6 @@ ActionsTypes = {
   },
   async [ActionTypes.SEARCH_ANIME]({ commit }, payload: {searched: string, factory: AnimeFactory}) {
     await payload.factory.controller.getSearchAnime(payload.searched)
-    console.log(payload.factory);
-    
-
     commit(MutationTypes.SET_SEARCH_ANIME, payload.factory.viewModel.resultAnimeSearch)
   },
   [ActionTypes.OPEN_SEARCH_ANIME]({ commit }, factory: AnimeFactory) {

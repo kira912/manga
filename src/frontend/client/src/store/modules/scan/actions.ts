@@ -2,15 +2,14 @@ import { ActionTree } from "vuex";
 import { ActionTypes } from "./action-types";
 import { MutationTypes } from "./mutation-types";
 import {
-  AnimeActionsTypes,
-  ScanStateTypes,
-  IRootState
-} from "../../interfaces";
+  ActionsTypes,
+  State
+} from "./interface";
 import { injectStrict } from "../../../utils/injectTyped";
 import { ChapterPage, ScanKey } from "../../../symbols";
 
-export const actions: ActionTree<ScanStateTypes, IRootState> &
-AnimeActionsTypes = {
+export const actions: ActionTree<State, State> &
+ActionsTypes = {
   async [ActionTypes.GET_ANIME_SCAN_CHAPTERS]({ commit }, id: string) {
     const scan = injectStrict(ScanKey);
     await scan.controller.getChapters(id);

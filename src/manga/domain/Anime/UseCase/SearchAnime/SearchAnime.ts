@@ -9,7 +9,6 @@ export class SearchAnime {
   async execute(request: SearchAnimeRequest, presenter: SearchAnimePresenterInterface) {
     const response = new SearchAnimeResponse();
     response.resultAnimes = await this.mangaApi.searchMangaBy(request.searched);
-    console.log(response);
     presenter.presentSearchAnime(response);
   }
 }

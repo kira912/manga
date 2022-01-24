@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { ref } from "@vue/reactivity";
-import { watch } from "@vue/runtime-core";
+import { onMounted, watch } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { AllActionTypes } from "../../../store/action-types";
 import { AnimeKey } from "../../../symbols";
@@ -37,9 +37,16 @@ const anime = injectStrict(AnimeKey);
 const viewModel = ref(anime.viewModel);
 
 watch(search, (searched, prevSearched) => {
-  if (searched !== prevSearched) {
+  if (searched === '') {
+    console.log('eff', searched);
+    store.dispatch(AllActionTypes.CLOSE_SEARCH_ANIME, anime);
+  } else if (searched !== prevSearched) {
     store.dispatch(AllActionTypes.SEARCH_ANIME, {searched, factory: anime});
     store.dispatch(AllActionTypes.OPEN_SEARCH_ANIME, anime);
   }
 });
+
+onMounted(() => {
+  store.dispatch(AllActionTypes.OPEN_SEARCH_ANIME, anime);
+})
 </script>

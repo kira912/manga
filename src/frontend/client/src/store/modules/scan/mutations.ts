@@ -1,8 +1,8 @@
 import { MutationTree } from "vuex";
 import { MutationTypes } from "./mutation-types";
 import { MutationsTypes, State } from "./interface";
-import { ChapterViewModel } from "clean-archi-manga/frontend/interface-adapter/Scan/Chapters/ViewModel";
-import { ChapterPagesViewModel } from "clean-archi-manga/frontend/interface-adapter/Scan/Pages/ViewModel";
+import { ChapterViewModel } from "../../../../../interface-adapter/Scan/Chapters/ViewModel";
+import { ChapterPagesViewModel } from "../../../../../interface-adapter/Scan/Pages/ViewModel";
 
 export const mutations: MutationTree<State> &
 MutationsTypes = {

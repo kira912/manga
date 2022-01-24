@@ -2,7 +2,7 @@ import {
   AnimeEpisodesViewModel,
   AnimeViewModel,
   AnimeSearchResultViewModel,
-} from "../../../../../interface-adapter";
+} from "../../../../../interface-adapter/Anime/ViewModel";
 import { ActionContext } from "vuex";
 import { ActionTypes } from "./action-types";
 import { MutationTypes } from "./mutation-types";

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div class="carousel">
-      <div class="inner" ref="inner" :style="innerStyles">
+      <div class="inner h-full mt-1" ref="inner" :style="innerStyles">
         <div
           class="page"
           v-for="(page, index) in store.getters.getChapterPages"
