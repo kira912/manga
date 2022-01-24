@@ -1,7 +1,9 @@
 {
     "name": "clean-archi-manga",
     "version": "0.0.0",
-    "scripts": {},
+    "scripts": {
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src"
+    },
     "dependencies": {
         "axios": "^0.24.0",
         "cheerio": "^1.0.0-rc.10",
@@ -11,7 +13,10 @@
         "@types/restify": "^7.2.12",
         "@types/typescript": "^2.0.0",
         "@types/uuid": "^3.4.5",
-        "eslint": "^7.8.0",
+        "@typescript-eslint/eslint-plugin": "^5.10.0",
+        "eslint": "^8.7.0",
+        "eslint-plugin-vue": "^8.3.0",
+        "prettier": "^2.5.1",
         "ts-loader": "^6.0.4",
         "tsconfig-paths-webpack-plugin": "^3.2.0",
         "tslint": "^5.14.0",

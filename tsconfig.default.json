@@ -27,16 +27,8 @@
     "baseUrl": "./src",
     "rootDir": "./src",
     "paths": {
-      "@/*": [
-        "src/frontend/vuejs/src/*"
-      ]
+      "@/*": ["src/frontend/vuejs/src/*"]
     }
   },
-  "exclude": [
-    "build",
-    "dist",
-    "node_modules",
-    "_",
-    "src/frontend/client"
-  ]
+  "exclude": ["build", "dist", "node_modules", "_"]
 }
