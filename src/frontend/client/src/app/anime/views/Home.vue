@@ -1,6 +1,6 @@
 <template>
 <div>
-  <GetAllAnimeView routerName="AnimeEpisodesDetail" />
+  <GetAllAnimeView />
 </div>
 </template>
 

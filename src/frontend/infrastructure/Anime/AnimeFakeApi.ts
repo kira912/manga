@@ -4,7 +4,7 @@ import { AnimeApi } from "./AnimeApi";
 export class AnimeFakeApi implements AnimeApiInterface {
   constructor(private api: AnimeApi) { }
 
-  getAll(): Promise<Anime[]> {
+  getAllAnime(): Promise<Anime[]> {
     return this.api.getAllAnime();
   }
 

@@ -11,13 +11,4 @@ export const mutations: MutationTree<State> &
   [MutationTypes.SET_ANIME_EPISODES](state: State, payload: AnimeEpisodesViewModel[]) {
     state.episodes = payload;
   },
-  [MutationTypes.SET_SEARCH_ANIME](state: State, payload: AnimeSearchResultViewModel[]) {
-    state.resultSearch = payload;
-  },
-  [MutationTypes.SET_OPEN_RESULT_SEARCH](state: State) {
-    state.resultSearchDisplayed = true;
-  },
-  [MutationTypes.SET_CLOSE_RESULT_SEARCH](state: State) {
-    state.resultSearchDisplayed = false;
-  },
 };

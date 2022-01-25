@@ -9,4 +9,6 @@ export class ChapterViewModel {
 
 export class ViewModel {
   chapters: ChapterViewModel[] = [];
+
+  noChapters = 'Aucun scan trouvé !'
 }

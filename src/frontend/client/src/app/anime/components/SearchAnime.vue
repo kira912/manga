@@ -28,25 +28,24 @@ import { ref } from "@vue/reactivity";
 import { onMounted, watch } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { AllActionTypes } from "../../../store/action-types";
-import { AnimeKey } from "../../../symbols";
+import { MangaKey } from "../../../symbols";
 import { injectStrict } from "../../../utils/injectTyped";
 
 const search = ref("");
 const store = useStore();
-const anime = injectStrict(AnimeKey);
-const viewModel = ref(anime.viewModel);
+const manga = injectStrict(MangaKey);
+const viewModel = ref(manga.viewModel);
 
 watch(search, (searched, prevSearched) => {
   if (searched === '') {
-    console.log('eff', searched);
-    store.dispatch(AllActionTypes.CLOSE_SEARCH_ANIME, anime);
+    store.dispatch(AllActionTypes.CLOSE_SEARCH_ANIME, manga);
   } else if (searched !== prevSearched) {
-    store.dispatch(AllActionTypes.SEARCH_ANIME, {searched, factory: anime});
-    store.dispatch(AllActionTypes.OPEN_SEARCH_ANIME, anime);
+    store.dispatch(AllActionTypes.SEARCH_ANIME, {searched, factory: manga});
+    store.dispatch(AllActionTypes.OPEN_SEARCH_ANIME, manga);
   }
 });
 
 onMounted(() => {
-  store.dispatch(AllActionTypes.OPEN_SEARCH_ANIME, anime);
+  store.dispatch(AllActionTypes.OPEN_SEARCH_ANIME, manga);
 })
 </script>

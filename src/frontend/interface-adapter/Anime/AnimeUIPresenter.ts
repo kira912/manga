@@ -5,22 +5,18 @@ import {
   GetAllAnimePresenterInterface,
   GetAllAnimeResponse,
   GetAnimeEpisodesResponse,
-  SearchAnimePresenterInterface,
-  SearchAnimeResponse,
 } from '../../../manga/domain';
 import { AnimeUI } from './AnimeUI';
-import { ViewModel, AnimeViewModel, AnimeEpisodesViewModel, AnimeSearchResultViewModel } from './ViewModel';
+import { ViewModel, AnimeViewModel, AnimeEpisodesViewModel } from './ViewModel';
 
 export class AnimeUIPresenter
   implements
     AnimeUI,
     GetAllAnimePresenterInterface,
-    GetAnimeEpisodesPresenterInterface,
-    SearchAnimePresenterInterface
+    GetAnimeEpisodesPresenterInterface
 {
   private animes: Anime[] = [];
   private episodes: Episode[] = [];
-  private resultAnimeSearch: AnimeSearchResultViewModel[] = [];
   private _viewModel = new ViewModel();
 
   get viewModel() {
@@ -37,35 +33,12 @@ export class AnimeUIPresenter
     this.updateAnimeEpisodeViewModel();
   }
 
-  presentSearchAnime(response: SearchAnimeResponse): void {
-    this.resultAnimeSearch = response.resultAnimes;
-    this.updateSearchedAnimeViewModel();
-  }
-
-  showResultSearch(): void {
-    this.viewModel.setDisplayResultSeatch(true);
-  }
-
-  hideResultSearch(): void {
-    this.viewModel.setDisplayResultSeatch(false);
-  }
-
 
   private updateAnimeViewModel() {
     this.viewModel.animes = this.animes.map((anime) => {
       return new AnimeViewModel(
         anime.id,
         anime.description,
-        anime.name,
-        anime.image,
-      );
-    });
-  }
-
-  private updateSearchedAnimeViewModel() {
-    this.viewModel.resultAnimeSearch = this.resultAnimeSearch.map((anime) => {
-      return new AnimeSearchResultViewModel(
-        anime.id,
         anime.name,
         anime.image,
       );

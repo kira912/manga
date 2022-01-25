@@ -1,13 +1,12 @@
 <template>
-  <Modal :name="`page_${props.index}`">
-    <img class="aspect-auto" :src="props.url" />
+  <Modal :name="store.getters.active.index">
+    <img class="aspect-auto" :src="store.getters.active.url" />
   </Modal>
 </template>
 
 <script setup lang="ts">
+import { useStore } from 'vuex';
 import Modal from '../../components/Modal.vue'
-const props = defineProps({
-  url: String,
-  index: Number
-})
+
+const store = useStore();
 </script>

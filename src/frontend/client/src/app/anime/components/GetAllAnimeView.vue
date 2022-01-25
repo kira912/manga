@@ -1,22 +1,23 @@
 <template>
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap justify-center">
     <router-link
       v-for="anime in store.getters.getAll"
       :key="anime.id"
-      :to="{name: props.routerName, params: {id: anime.id}}"
+      :to="{name: 'AnimeEpisodesDetail', params: {id: anime.id}}"
+      class="h-98"
     >
       <div
-        class="max-w-md p-4 m-2 pointer-events bg-white shadow-lg rounded-lg my-20 hover:shadow-2xl"
+        class="card-bg w-80 m-2 pointer-events shadow-lg rounded-lg mt-20 hover:shadow-2xl"
       >
-        <div class="flex justify-center md:justify-end -mt-16">
+        <div class="flex justify-center w-full">
           <img
-            class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
+            class="h-40 object-cover w-full rounded-2xl"
             :src="anime.image"
           />
         </div>
-        <div>
-          <h2 class="text-gray-800 text-xl font-semibold">{{ anime.name }}</h2>
-          <p class="mt-2 text-gray-600">{{ anime.description.slice(0, 150) }}</p>
+        <div class="flex flex-col p-4 h-52 self-end mt-auto">
+          <h2 class="text-white text-lg font-semibold">{{ anime.name }}</h2>
+          <p class="self-end text-white">{{ anime.description.slice(0, 150) + '...'}}</p>
         </div>
       </div>
     </router-link>

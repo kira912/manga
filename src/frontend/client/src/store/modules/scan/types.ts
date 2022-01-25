@@ -1,7 +1,7 @@
 import { State, MutationsTypes, GettersTypes, ActionsTypes } from './interface';
 import { Store as VuexStore, CommitOptions, DispatchOptions } from 'vuex';
 
-export type StoreModuleTypes<S = State> = Omit<
+export type ScanStoreModuleTypes<S = State> = Omit<
   VuexStore<S>,
   'commit' | 'getters' | 'dispatch'
 > & {

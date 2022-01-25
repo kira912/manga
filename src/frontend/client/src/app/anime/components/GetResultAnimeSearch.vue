@@ -1,12 +1,14 @@
 <template>
-  <div class="flex flex-wrap justify-center" v-if="store.getters.resultIsActive">
+  <div class="flex flex-wrap justify-center rounded-lg shadow-lg" v-if="store.getters.resultIsActive">
     <router-link
       v-for="anime in store.getters.getSearchResult"
       :key="anime.id"
-      :to="{ name: 'AnimeScanDetail', params: { id: anime.id } }"
+      :to="{ name: 'MangaDetail', params: { id: anime.id } }"
+      @click="store.dispatch(AllActionTypes.CLOSE_SEARCH_ANIME, mangaFactory)"
+      class="hover:shadow-2xl w-50"
     >
       <div
-        class="flex flex-col justify-center h-20 w-40 m-2 pointer-events bg-white shadow-lg rounded-lg my-20 hover:shadow-2xl"
+        class="flex flex-col justify-center h-20 w-40 m-2 pb-5 pointer-events bg-white rounded-lg my-20"
       >
         <div class="-mt-16 self-center">
           <img
@@ -22,6 +24,9 @@
 
 <script setup lang="ts">
 import { useStore } from 'vuex';
-
+import { AllActionTypes } from '../../../store/action-types';
+import { MangaKey } from '../../../symbols';
+import { injectStrict } from '../../../utils/injectTyped';
+const mangaFactory = injectStrict(MangaKey);
 const store = useStore();
 </script>

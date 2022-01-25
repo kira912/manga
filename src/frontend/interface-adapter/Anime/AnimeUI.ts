@@ -1,4 +1,1 @@
-export interface AnimeUI {
-  showResultSearch(): void;
-  hideResultSearch(): void;
-}
+export interface AnimeUI {}

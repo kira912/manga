@@ -1,9 +1,9 @@
 <template>
 <div>
-  <GetAllAnimeView routerName="AnimeScanDetail" />
+  <GetAllMangaScanAvailableVue />
 </div>
 </template>
 
 <script setup lang="ts">
-  import GetAllAnimeView from '../../anime/components/GetAllAnimeView.vue'
+  import GetAllMangaScanAvailableVue from '../../manga/components/GetAllMangaScanAvailable.vue';
 </script>

@@ -1,10 +1,10 @@
 <template>
   <div
-    :class="`fixed ${!isActive ? 'hidden' : ''} z-60 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full`"
+    :class="`fixed ${!isOpen ? 'hidden' : ''} z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full`"
     v-if="isOpen"
     @click="close"
   >
-    <div class="relative top-40 mx-auto shadow-lg rounded-md bg-white max-w-md">
+    <div class="relative top-40 mx-auto shadow-lg rounded-md bg-white max-w-md zoom-page">
       <slot :close="close"></slot>
     </div>
   </div>
@@ -21,20 +21,19 @@ const props = defineProps({
 });
 const store = useStore();
 
-const isActive = computed(() => {
-  return store.getters.active === props.name;
+const isOpen = computed(() => {
+
+  if (store.getters.active.index === '') {
+    return false;
+  }
+  return store.getters.active.index === props.name;
 });
 
-const isOpen = computed(() => {
-  return store.getters.allOpen.includes(props.name);
-});
+console.log(isOpen.value);
+
 
 const close = () => {
-  store.dispatch(AllActionTypes.CLOSE_MODAL, props.name);
-};
-
-const closeAllModal = () => {
-  store.dispatch(AllActionTypes.CLOSE_ALL_MODAL);
+  store.dispatch(AllActionTypes.CLOSE_SCAN_PAGE_MODAL, props.name);
 };
 
 onUnmounted(() => {
@@ -43,3 +42,10 @@ onUnmounted(() => {
   }
 });
 </script>
+
+<style scoped>
+
+.zoom-page {
+  min-width: 40rem;
+}
+</style>

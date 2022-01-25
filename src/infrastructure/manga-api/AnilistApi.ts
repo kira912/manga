@@ -1,49 +1,62 @@
-import { Anime, Episode, AnimeApiInterface, Chapter } from '../../manga/domain';
+import { Anime, Episode, AnimeApiInterface } from '../../manga/domain';
 
 export class AnilistApi implements AnimeApiInterface {
-  private baseUri = "https://api.mangadex.org";
-  private baseUriCover = "https://uploads.mangadex.org/covers";
+  private baseUri = "https://graphql.anilist.co";
 
-  async getAll(): Promise<Anime[]> {
-    const urlParams = {
-      "availableTranslatedLanguage[]": "fr",
-      "includes[]": "cover_art",
-      "offset": 0,
-      "limit": 100
-    }
+  async getAllAnime(): Promise<Anime[]> {
+    const query = `
+      query ($page: Int, $perPage: Int) {
+        Page(page: $page, perPage: $perPage) {
+          pageInfo {
+            total
+            perPage
+          }
+          media(type: ANIME, sort: FAVOURITES_DESC) {
+            id
+            description
+            coverImage {
+              medium
+            }
+            title {
+              english
+            }
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      query,
+      page: 1,
+      perPage: 3,
+    };
 
     const headers = new Headers({
       "Content-Type": "application/json",
       "Accept": "application/json",
     });
 
-    const options = { 
-      method: 'GET',
-      headers: headers,
+    const options = {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(variables),
     };
-      
-    const result = await fetch(`${this.baseUri}/manga?${new URLSearchParams(urlParams)}`, options)
+
+    const result = await fetch(this.baseUri, options)
 
     if (result.status !== 200) {
       return [];
     }
 
-    const animes: Anime[] = [];
+    const animes = Array();
     const response = await result.json();
 
-    if (response.result !== 'ok') {
-      console.error(response)
-
-      return animes;
-    }
-
-    for (const data of response.data) {
-      const covertArtRelation = data.relationships.filter(element => element.type === "cover_art")[0];
+    for (const data of response.data.Page.media) {
       animes.push(new Anime(
         data.id,
-        data.attributes.description.en ?? '',
-        data.attributes.title.en,
-        `${this.baseUriCover}/${data.id}/${covertArtRelation.attributes.fileName}`
+        data.description,
+        data.title.english,
+        data.coverImage.medium,
       ));
     }
 
@@ -73,7 +86,7 @@ export class AnilistApi implements AnimeApiInterface {
     `;
 
     const variables = {
-      query: query,
+      query,
       id: animeId
     };
 
@@ -84,31 +97,30 @@ export class AnilistApi implements AnimeApiInterface {
 
     const options = { 
       method: 'POST',
-      headers: headers,
+      headers,
       body: JSON.stringify(variables),
     };
-      
-    const result = await fetch(this.baseUri, options)
-    
+
+    const result = await fetch(this.baseUri, options);
+
     if (result.status !== 200) {
       return [];
     }
 
     const animeEpisodes: Episode[] = [];
     const response = await result.json();
+
     console.log(response);
-    
-    
+
     for (const data of response.data.Media.streamingEpisodes) {
-      // console.log(data);
       animeEpisodes.push(new Episode(
         data.title,
         data.site,
         data.url,
-        data.thumbnail
+        data.thumbnail,
       ));
     }
-    
+
     return animeEpisodes;
   }
 }

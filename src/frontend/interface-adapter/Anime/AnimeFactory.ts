@@ -2,7 +2,6 @@ import {
   AnimeApiInterface,
   GetAnimeEpisodes,
   GetAllAnime,
-  SearchAnime
 } from '../../../manga/domain';
 import { AnimeUI } from './AnimeUI';
 import { AnimeUIPresenter } from './AnimeUIPresenter';
@@ -28,10 +27,8 @@ export class AnimeFactory {
       () => new AnimeController(
         new GetAllAnime(this.mangaApi),
         new GetAnimeEpisodes(this.mangaApi),
-        new SearchAnime(this.mangaApi),
         this.presenter,
         this.presenter,
-        this.presenter
       ),
     );
   }

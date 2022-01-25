@@ -1,9 +1,13 @@
 import { ActionContext } from "vuex";
+import { IRootState } from "../root";
 import { ActionTypes } from "./action-types";
 import { MutationTypes } from "./mutation-types";
 
 export interface State {
-  open: Array<string>;
+  scanPageOpen: {
+    index: string,
+    url: string,
+  };
 }
 
 export type AugmentedActionContext = {
@@ -11,26 +15,24 @@ export type AugmentedActionContext = {
     key: K,
     payload: Parameters<MutationsTypes[K]>[1]
   ): ReturnType<MutationsTypes[K]>;
-} & Omit<ActionContext<State, State>, "commit">;
+} & Omit<ActionContext<State, IRootState>, "commit">;
 
 export interface ActionsTypes {
-  [ActionTypes.OPEN_MODAL](
+  [ActionTypes.OPEN_SCAN_PAGE_MODAL](
     { commit }: AugmentedActionContext,
-    payload: string
+    name: string,
+    url: string,
   ): void;
-  [ActionTypes.CLOSE_MODAL](
+  [ActionTypes.CLOSE_SCAN_PAGE_MODAL](
     { commit }: AugmentedActionContext,
-    payload: string
   ): void;
 }
 
 export interface GettersTypes {
   active(state: State): void;
-  allOpen(state: State): void;
 }
 
 export type MutationsTypes<S = State> = {
-  [MutationTypes.SET_OPEN_MODAL](state: S, payload: string): void;
-  [MutationTypes.SET_CLOSE_MODAL](state: S, payload: string): void;
-  [MutationTypes.SET_CLOSE_ALL_MODAL](state: S): void;
+  [MutationTypes.SET_OPEN_SCAN_MODAL](state: S, payload: {name: string, url: string}): void;
+  [MutationTypes.SET_CLOSE_SCAN_MODAL](state: S): void;
 };

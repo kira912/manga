@@ -20,16 +20,8 @@
 </div>
 </template>
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { onBeforeMount } from "@vue/runtime-core";
 import { useStore } from 'vuex';
-import { AllActionTypes } from '../../../store/action-types';
 
 const store = useStore();
-const route = useRoute();
-
-onBeforeMount(async () => {
-  await store.dispatch(AllActionTypes.GET_ANIME_SCAN_CHAPTERS, route.params.id);
-})
 
 </script>

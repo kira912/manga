@@ -1,148 +1,74 @@
 <template>
   <div class="flex flex-col">
-    <div class="carousel">
-      <div class="inner h-full mt-1" ref="inner" :style="innerStyles">
-        <div
-          class="page"
-          v-for="(page, index) in store.getters.getChapterPages"
-          :key="index"
-          ref="inner"
-        >
-          <img
-            class="aspect-auto"
-            :src="page.url"
-            :alt="page.id"
-            @click="store.dispatch(AllActionTypes.OPEN_MODAL, `page_${index}`)"
-          />
-          <GetSinglePage :url="page.url" :index="index" />
+    <div class v-for="(page, index) in store.getters.getChapterPages" :key="index">
+      <input class="sr-only peer" type="radio" name="carousel" :id="`carousel-${index}`" :checked="isFirstPage(index)" />
+
+      <div
+        class="w-96 absolute top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg transition-all duration-300 opacity-0 peer-checked:opacity-100 peer-checked:z-10 z-0"
+      >
+        <img
+          class="rounded-t-lg w-full h-full"
+          :src="page.url"
+          @click="store.dispatch(AllActionTypes.OPEN_SCAN_PAGE_MODAL, {name: `scan_page_${index}`, url: page.url})"
+        />
+
+        <div class="absolute top-1/2 w-full flex justify-between z-20">
+          <label
+            :for="`carousel-${Math.abs(index - 1)}`"
+            class="inline-block text-red-600 cursor-pointer -translate-x-5 bg-white rounded-full shadow-md active:translate-y-0.5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-10"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </label>
+          <label
+            :for="`carousel-${Math.abs(index + 1)}`"
+            class="inline-block text-red-600 cursor-pointer translate-x-5 bg-white rounded-full shadow-md active:translate-y-0.5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-10"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </label>
         </div>
       </div>
-    </div>
-    <div class="flex flex-wrap self-center">
-      <button
-        class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-        @click="prev"
-      >
-        prev
-      </button>
-      <button
-        class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-        @click="next"
-      >
-        next
-      </button>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { AllActionTypes } from "../../../store/action-types";
-import GetSinglePage from "./GetSinglePage.vue";
 
 const store = useStore();
 const route = useRoute();
-const innerStyles = ref({});
-const inner = ref(null);
-const step = ref("");
-const transitioning = ref(false);
-const setStep = () => {
-  const innerWidth = inner.value.scrollWidth;
-  const totalCards = store.getters.getChapterPages.length;
-  step.value = `${innerWidth / totalCards}px`;
-};
-const next = () => {
-  if (transitioning.value) {
-    return;
-  }
 
-  transitioning.value = true;
-  moveLeft();
-  afterTransition(() => {
-    const card = store.getters.getChapterPages.shift();
-    store.getters.getChapterPages.push(card);
-    resetTranslate();
-    transitioning.value = false;
-  });
-};
-const prev = () => {
-  if (transitioning.value) {
-    return;
-  }
-
-  transitioning.value = true;
-  moveRight();
-  afterTransition(() => {
-    const card = store.getters.getChapterPages.pop();
-    store.getters.getChapterPages.unshift(card);
-    resetTranslate();
-    transitioning.value = false;
-  });
-};
-const moveLeft = () => {
-  innerStyles.value = {
-    transform: `translateX(-${step.value})
-                translateX(-${step.value})`,
-  };
-};
-const moveRight = () => {
-  innerStyles.value = {
-    transform: `translateX(${step.value})
-                translateX(-${step.value})`,
-  };
-};
-
-const afterTransition = (callback) => {
-  const listener = () => {
-    callback();
-    inner.value.removeEventListener("transitionend", listener);
-  };
-  inner.value.addEventListener("transitionend", listener);
-};
-const resetTranslate = () => {
-  innerStyles.value = {
-    transition: "none",
-    transform: `translateX(-${step.value})`,
-  };
-};
+const isFirstPage = (pageIndex) => {
+  return pageIndex === 0;
+}
 
 onMounted(async () => {
   await store.dispatch(
-    AllActionTypes.GET_ANIME_SCAN_CHAPTER_PAGE,
-    route.params.bookId
+    AllActionTypes.GET_SCAN_CHAPTER_PAGE,
+    route.params.bookId,
   );
-
-  window.addEventListener('keydown', (event) => {
-    if (event.which === 37) {
-      prev()
-    }
-    else if (event.which === 39) {
-      next()
-    }
-  })
-
-  setStep();
-  resetTranslate();
 });
 </script>
-
-<style scoped>
-.carousel {
-  width: 100%;
-  overflow: hidden;
-}
-.inner {
-  transition: transform 0.2s;
-  white-space: nowrap;
-}
-.page {
-  display: inline-flex;
-  background-color: #39b1bd;
-  color: white;
-  border-radius: 4px;
-  align-items: center;
-  justify-content: center;
-  height: 50%;
-}
-</style>

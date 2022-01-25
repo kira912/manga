@@ -1,10 +1,11 @@
 import { GetterTree } from "vuex";
+import { IRootState } from "../root";
 import {
   GettersTypes,
   State
 } from "./interface";
 
-export const getters: GetterTree<GettersTypes, State> &
+export const getters: GetterTree<GettersTypes, IRootState> &
   GettersTypes = {
   getAll: (state: State) => {
     return state.animes || [];
@@ -12,10 +13,4 @@ export const getters: GetterTree<GettersTypes, State> &
   getAnimeEpisodes: (state: State) => {
     return state.episodes || [];
   },
-  getSearchResult: (state: State) => {
-    return state.resultSearch || [];
-  },
-  resultIsActive: (state: State) => {
-    return state.resultSearchDisplayed
-  }
 };
