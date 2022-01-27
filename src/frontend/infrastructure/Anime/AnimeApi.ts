@@ -39,6 +39,6 @@ export class AnimeApi implements GetAllAnimePresenterInterface, GetAnimeEpisodes
 
   async getSearchAnime(searched: string) {
     await searchAnime.execute(new SearchAnimeRequest(searched), this);
-    return this.searchAnimeResponse!.resultAnimes;
+    return this.searchAnimeResponse!.resultMangas;
   }
 }

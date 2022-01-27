@@ -212,13 +212,6 @@ autoprefixer@^10.4.1:
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
 
-axios@^0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
-  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
-  dependencies:
-    follow-redirects "^1.14.4"
-
 binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
@@ -517,11 +510,6 @@ fill-range@^7.0.1:
   integrity sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
   dependencies:
     to-regex-range "^5.0.1"
-
-follow-redirects@^1.14.4:
-  version "1.14.6"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.6.tgz#8cfb281bbc035b3c067d6cd975b0f6ade6e855cd"
-  integrity sha512-fhUl5EwSJbbl8AR+uYL2KQDxLkdSjZGR36xy46AO7cOMTrCMON6Sa28FmAnC2tRTDbd/Uuzz3aJBv7EBN7JH8A==
 
 fraction.js@^4.1.2:
   version "4.1.2"
@@ -915,11 +903,6 @@ vue-router@^4.0.0-0:
   integrity sha512-CPXvfqe+mZLB1kBWssssTiWg4EQERyqJZes7USiqfW9B5N2x+nHlnsM1D3b5CaJ6qgCvMmYJnz+G0iWjNCvXrg==
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.18"
-
-vue3-carousel@^0.1.35:
-  version "0.1.35"
-  resolved "https://registry.yarnpkg.com/vue3-carousel/-/vue3-carousel-0.1.35.tgz#d5bd5b8e7a4220a6500f9066b8189031dd923942"
-  integrity sha512-a2mfbjRJDk5Pa6Vxt0NJnxZBdI2SZzwWRUr/KEBzk+CZk/bT4uXsY2+bDr/A3JHwGgfZRwTTY/Mt1GlPjIncrw==
 
 vue@^3.2.25:
   version "3.2.26"

@@ -14,8 +14,8 @@ export class MangaController {
     private searchAnimePresenter: SearchAnimePresenterInterface) {
   }
 
-  async getAllMangas() {
-    await this.getAllManga.execute(this.getAllMangaPresenter);
+  getAllMangas() {
+    return this.getAllManga.execute(this.getAllMangaPresenter);
   }
 
   async getSearchAnime(searched: string) {

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap justify-center">
     <router-link
-      v-for="manga in store.getters.getAllManga"
+      v-for="manga of store.getters.getAllManga"
       :key="manga.id"
       :to="{name: 'ScanDetail', params: {id: manga.id}}"
       class="h-98"
@@ -29,8 +29,8 @@ import { useStore } from "vuex";
 import { AllActionTypes } from "../../../store/action-types";
 const store = useStore();
 
-onBeforeMount(async () => {
-  await store.dispatch(AllActionTypes.GET_ALL_MANGA);
-})
+onBeforeMount(() => {
+  store.dispatch(AllActionTypes.GET_ALL_MANGA);
+});
 
 </script>

@@ -3,7 +3,7 @@ import { ActionTypes } from "./action-types";
 import { MutationTypes } from "./mutation-types";
 import { MangaViewModel } from "frontend/interface-adapter/Manga/ViewModel";
 import { IRootState } from "../root";
-import { AnimeSearchResultViewModel } from "frontend/interface-adapter/Anime/ViewModel";
+import { AnimeSearchResultViewModel } from "frontend/interface-adapter/Manga/ViewModel";
 import { MangaFactory } from "frontend/interface-adapter";
 
 export interface State {

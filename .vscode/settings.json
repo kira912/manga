@@ -3,7 +3,7 @@
     "editor.tabSize": 2,
     "editor.wordWrap": "on",
     "editor.renderWhitespace": "boundary",
-    "workbench.colorTheme": "Atom One Dark",
+    "workbench.colorTheme": "One Dark Pro",
     "workbench.preferredDarkColorTheme": "Visual Studio Dark",
     "editor.minimap.enabled": false,
     "window.autoDetectColorScheme": true

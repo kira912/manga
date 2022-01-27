@@ -29,9 +29,6 @@ const isOpen = computed(() => {
   return store.getters.active.index === props.name;
 });
 
-console.log(isOpen.value);
-
-
 const close = () => {
   store.dispatch(AllActionTypes.CLOSE_SCAN_PAGE_MODAL, props.name);
 };

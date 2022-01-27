@@ -1,3 +1,8 @@
+import { UniqueEntityId } from '../../../core/domain/UniqueEntityId';
+import { ChapterExternalViewer } from '../../../manga/domain/Scan/Entity/ChapterExternalViewer';
+import { ChapterName } from '../../../manga/domain/Scan/Entity/ChapterName';
+import { ChapterNumber } from '../../../manga/domain/Scan/Entity/ChapterNumber';
+import { PageUrl } from '../../../manga/domain/Scan/Entity/PageUrl';
 import { Chapter, Page, ScanApiInterface } from '../../../manga/domain';
 import { MangadexApiRequester } from './MangadexApiRequester';
 import {
@@ -33,14 +38,19 @@ export class ScanMangaDexApi
         continue;
       }
 
-      chapters.push(
-        new Chapter(
-          data.id,
-          data.attributes.title,
-          data.attributes.chapter,
-          viewerId,
-        ),
-      );
+      const chapterOrError = Chapter.create({
+        name: ChapterName.create(data.attributes.title).getValue(),
+        number: ChapterNumber.create(data.attributes.chapter).getValue(),
+        externalViewer: ChapterExternalViewer.create(viewerId).getValue(),
+        pages: []
+      });
+
+      if (chapterOrError.isFailure) {
+        console.log(chapterOrError);
+        continue;
+      }
+
+      chapters.push(chapterOrError.getValue());
     }
 
     return chapters;
@@ -80,13 +90,20 @@ export class ScanMangaDexApi
       if (encryptions[urls.indexOf(url)]) {
         try {
           const blobUrl = await getBlobUrl(url, encryptions[urls.indexOf(url)]);
-          pages.push(new Page(viewerId, blobUrl));
-        } catch (error) {}
+          const pageOrError = Page.create({ url: PageUrl.create(blobUrl).getValue() }, new UniqueEntityId(viewerId))
+
+          if (pageOrError.isFailure) {
+            console.log(pageOrError);
+            continue;
+          }
+
+          pages.push(pageOrError.getValue());
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
 
-    console.log(pages);
-    
     return pages;
   }
 

@@ -1,5 +1,5 @@
-import { Anime } from "../../Entity/Anime";
+import { Manga } from "../../../../../manga/domain";
 
 export class SearchAnimeResponse {
-  resultAnimes: Anime[] = [];
+  resultMangas: Manga[] = [];
 }

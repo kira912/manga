@@ -1,7 +1,7 @@
 import { MutationTree } from "vuex";
 import { MutationTypes } from "./mutation-types";
 import { MutationsTypes, State } from "./interface";
-import { MangaViewModel } from "frontend/interface-adapter/Manga/ViewModel";
+import { AnimeSearchResultViewModel, MangaViewModel } from "frontend/interface-adapter/Manga/ViewModel";
 
 export const mutations: MutationTree<State> &
   MutationsTypes = {

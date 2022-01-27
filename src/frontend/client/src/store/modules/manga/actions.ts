@@ -19,14 +19,14 @@ ActionsTypes = {
   },
   async [ActionTypes.SEARCH_ANIME]({ commit }, payload: {searched: string, factory: MangaFactory}) {
     await payload.factory.controller.getSearchAnime(payload.searched)
-    commit(MutationTypes.SET_SEARCH_ANIME, payload.factory.viewModel.resultAnimeSearch)
+    commit(MutationTypes.SET_SEARCH_ANIME, payload.factory.viewModel.resultMangaSearch)
   },
   [ActionTypes.OPEN_SEARCH_ANIME]({ commit }, factory: MangaFactory) {
     factory.ui.showResultSearch();
-    commit(MutationTypes.SET_OPEN_RESULT_SEARCH, true)
+    commit(MutationTypes.SET_OPEN_RESULT_SEARCH, true);
   },
   [ActionTypes.CLOSE_SEARCH_ANIME]({ commit }, factory: MangaFactory) {
     factory.ui.hideResultSearch();
-    commit(MutationTypes.SET_CLOSE_RESULT_SEARCH, false)
+    commit(MutationTypes.SET_CLOSE_RESULT_SEARCH, false);
   },
 };

@@ -2,12 +2,12 @@
     "name": "clean-archi-manga",
     "version": "0.0.0",
     "scripts": {
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src/"
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src/",
+        "install-all": "yarn install && cd src/frontend/client && yarn install",
+        "dev": "cd src/frontend/client && yarn dev"
     },
     "dependencies": {
-        "axios": "^0.24.0",
-        "cheerio": "^1.0.0-rc.10",
-        "event-target-shim": "^5.0.1"
+        "shallow-equal-object": "^1.1.1"
     },
     "devDependencies": {
         "@types/restify": "^7.2.12",
@@ -19,7 +19,6 @@
         "prettier": "^2.5.1",
         "ts-loader": "^6.0.4",
         "tsconfig-paths-webpack-plugin": "^3.2.0",
-        "tslint": "^5.14.0",
         "type-graphql": "^0.17.4",
         "typescript": "^3.3.4000"
     }

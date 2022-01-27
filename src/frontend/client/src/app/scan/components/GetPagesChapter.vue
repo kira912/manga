@@ -8,8 +8,8 @@
       >
         <img
           class="rounded-t-lg w-full h-full"
-          :src="page.url"
-          @click="store.dispatch(AllActionTypes.OPEN_SCAN_PAGE_MODAL, {name: `scan_page_${index}`, url: page.url})"
+          :src="page.url.value"
+          @click="store.dispatch(AllActionTypes.OPEN_SCAN_PAGE_MODAL, {name: `scan_page_${index}`, url: page.url.value})"
         />
 
         <div class="absolute top-1/2 w-full flex justify-between z-20">
@@ -53,7 +53,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { AllActionTypes } from "../../../store/action-types";

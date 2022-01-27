@@ -43,13 +43,11 @@ export class MangadexApiRequester {
     try {
       const result = await fetch(`${url}?${params}`, options);
       if (result.status !== 200) {
-        console.error(result);
         return null;
       }
 
       if (isJson) {
         const response = await result.json();
-        console.log(response);
         if (response.result !== 'ok') {
           console.error(response);
 
