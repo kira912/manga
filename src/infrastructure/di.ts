@@ -3,12 +3,12 @@ import {
     GetAnimeEpisodes,
     GetScanChapters,
     GetScanChapterPage,
-    SearchAnime,
+    SearchManga,
     GetAllManga
 } from "../manga/domain";
-import { AnilistApi } from "./manga-api/AnilistApi";
-import { MangaApiMangaDex } from "./manga-api/MangaDex/MangaApiMangaDex";
-import { ScanMangaDexApi } from "./manga-api/MangaDex/ScanMangaDexApi";
+import { AnilistApi } from "./manga-api/anilist/AnilistApi";
+import { MangaApiMangaDex } from "./manga-api/mangaDex/MangaApiMangaDex";
+import { ScanMangaDexApi } from "./manga-api/mangaDex/ScanMangaDexApi";
 
 export const anilistMangaApi = new AnilistApi();
 export const scanMangadexApi = new ScanMangaDexApi();
@@ -20,4 +20,4 @@ export const getAllAnime = new GetAllAnime(anilistMangaApi);
 export const getAnimeEpisodes = new GetAnimeEpisodes(anilistMangaApi);
 export const getScanChapter = new GetScanChapters(scanMangadexApi);
 export const getScanChapterPages = new GetScanChapterPage(scanMangadexApi);
-export const searchAnime = new SearchAnime(mangadexApi);
+export const searchAnime = new SearchManga(mangadexApi);

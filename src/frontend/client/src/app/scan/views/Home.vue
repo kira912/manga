@@ -1,9 +1,9 @@
 <template>
 <div>
-  <GetAllMangaScanAvailableVue />
+  <GetAllManga to-name-page="ScanDetail" />
 </div>
 </template>
 
 <script setup lang="ts">
-  import GetAllMangaScanAvailableVue from '../../manga/components/GetAllMangaScanAvailable.vue';
+  import GetAllManga from '../../manga/components/GetAllManga.vue';
 </script>

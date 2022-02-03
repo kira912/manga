@@ -1,60 +1,65 @@
-import { Anime } from "./Anime/Entity/Anime";
-import { Episode } from "./Anime/Entity/Episode";
-import { Chapter } from "./Scan/Entity/Chapter";
-import { Page } from "./Scan/Entity/Page";
-import { Manga } from './Manga/Entity/Manga'
+import { Anime } from "./anime/entity/Anime";
+import { Episode } from "./anime/entity/Episode";
+import { Chapter } from "./scan/entity/Chapter";
+import { Page } from "./scan/entity/Page";
+import { Manga } from './manga/entity/Manga'
 
-import { GetAllAnime } from "./Anime/UseCase/GetAllAnime/GetAllAnime";
-import { GetAnimeEpisodes } from "./Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodes";
-import { GetScanChapters } from "./Scan/UseCase/GetScanChapters/GetScanChapters";
-import { GetScanChapterPage } from "./Scan/UseCase/GetChapterPages/GetScanChapterPage";
-import { SearchAnime } from "./Anime/UseCase/SearchAnime/SearchAnime";
+import { GetAllAnime } from "./anime/useCases/getAllAnime/GetAllAnime";
+import { GetAnimeEpisodes } from "./anime/useCases/getAnimeEpisodes/GetAnimeEpisodes";
+import { GetScanChapters } from "./scan/useCases/getScanChapters/GetScanChapters";
+import { GetScanChapterPage } from "./scan/useCases/getChapterPages/GetScanChapterPage";
+import { SearchManga } from "./manga/useCases/searchManga/SearchManga";
+import { GetMangaById } from "./manga/useCases/getMangaById/GetMangaById";
+import { GetAllManga } from "./manga/useCases/getAllManga/GetAllManga";
 
-import { GetAllManga } from "./Manga/UseCase/GetAllManga/GetAllManga";
+import { GetAllAnimeResponse } from "./anime/useCases/getAllAnime/GetAllAnimeResponse";
+import { GetScanChapterPageResponse } from "./scan/useCases/getChapterPages/GetScanChapterPageResponse";
+import { GetAnimeEpisodesResponse } from "./anime/useCases/getAnimeEpisodes/GetAnimeEpisodesResponse";
+import { GetScanChaptersResponse } from "./scan/useCases/getScanChapters/GetScanChaptersResponse";
+import { SearchMangaResponse } from "./manga/useCases/searchManga/SearchMangaResponse";
+import { GetMangaByIdResponse } from "./manga/useCases/getMangaById/GetMangaByIdResponse";
+import { GetAllMangaResponse } from "./manga/useCases/getAllManga/GetAllMangaResponse";
 
-import { GetAllAnimeResponse } from "./Anime/UseCase/GetAllAnime/GetAllAnimeResponse";
-import { GetScanChapterPageResponse } from "./Scan/UseCase/GetChapterPages/GetScanChapterPageResponse";
-import { GetAnimeEpisodesResponse } from "./Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodesResponse";
-import { GetScanChaptersResponse } from "./Scan/UseCase/GetScanChapters/GetScanChaptersResponse";
-import { SearchAnimeResponse } from "./Anime/UseCase/SearchAnime/SearchAnimeResponse";
+export * from "./anime/useCases/getAllAnime/GetAllAnimePresenterInterface";
+export * from "./anime/useCases/getAnimeEpisodes/GetAnimeEpisodesPresenterInterface";
+export * from "./scan/useCases/getScanChapters/GetScanChaptersPresenterInterface";
+export * from "./scan/useCases/getChapterPages/GetScanChapterPagePresenterInterface";
+export * from "./manga/useCases/searchManga/SearchMangaPresenterInterface"
+export * from "./anime/useCases/AnimeApiInterface";
+export * from "./scan/useCases/ScanApiInterface";
+export * from "./manga/useCases/MangaApiInterface";
+export * from "./manga/useCases/getAllManga/GetAllMangaPresenterInterface";
+export * from "./manga/useCases/getMangaById/GetMangaByIdPresenterInterface";
 
-import { GetAllMangaResponse } from "./Manga/UseCase/GetAllManga/GetAllMangaResponse";
-
-export * from "./Anime/UseCase/GetAllAnime/GetAllAnimePresenterInterface";
-export * from "./Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodesPresenterInterface";
-export * from "./Scan/UseCase/GetScanChapters/GetScanChaptersPresenterInterface";
-export * from "./Scan/UseCase/GetChapterPages/GetScanChapterPagePresenterInterface";
-export * from "./Anime/UseCase/SearchAnime/SearchAnimePresenterInterface"
-export * from "./Anime/UseCase/AnimeApiInterface";
-export * from "./Scan/UseCase/ScanApiInterface";
-export * from "./Manga/UseCase/MangaApiInterface";
-export * from "./Manga/UseCase/GetAllManga/GetAllMangaPresenterInterface"
-
-import { GetAnimeEpisodeRequest } from "./Anime/UseCase/GetAnimeEpisodes/GetAnimeEpisodeRequest";
-import { GetScanChaptersRequest } from "./Scan/UseCase/GetScanChapters/GetScanChaptersRequest";
-import { GetScanChapterPageRequest } from "./Scan/UseCase/GetChapterPages/GetScanChapterPageRequest";
-import { SearchAnimeRequest } from "./Anime/UseCase/SearchAnime/SearchAnimeRequest";
+import { GetAnimeEpisodeRequest } from "./anime/useCases/getAnimeEpisodes/GetAnimeEpisodeRequest";
+import { GetScanChaptersRequest } from "./scan/useCases/getScanChapters/GetScanChaptersRequest";
+import { GetScanChapterPageRequest } from "./scan/useCases/getChapterPages/GetScanChapterPageRequest";
+import { SearchMangaRequest } from "./manga/useCases/searchManga/SearchMangaRequest";
+import { GetMangaByIdRequest } from "./manga/useCases/getMangaById/GetMangaByIdRequest";
 
 export {
-    Anime,
-    Episode,
-    Chapter,
-    Page,
-    Manga,
-    GetAllManga,
-    GetAllAnime,
-    GetAnimeEpisodes,
-    GetScanChapters,
-    GetScanChapterPage,
-    SearchAnime,
-    GetAllMangaResponse,
-    GetAllAnimeResponse,
-    GetAnimeEpisodesResponse,
-    GetScanChaptersResponse,
-    GetScanChapterPageResponse,
-    SearchAnimeResponse,
-    GetAnimeEpisodeRequest,
-    GetScanChaptersRequest,
-    GetScanChapterPageRequest,
-    SearchAnimeRequest
+  Anime,
+  Episode,
+  Chapter,
+  Page,
+  Manga,
+  GetAllManga,
+  GetAllAnime,
+  GetAnimeEpisodes,
+  GetScanChapters,
+  GetScanChapterPage,
+  SearchManga,
+  GetMangaById,
+  GetAllMangaResponse,
+  GetAllAnimeResponse,
+  GetAnimeEpisodesResponse,
+  GetScanChaptersResponse,
+  GetScanChapterPageResponse,
+  SearchMangaResponse,
+  GetMangaByIdResponse,
+  GetAnimeEpisodeRequest,
+  GetScanChaptersRequest,
+  GetScanChapterPageRequest,
+  SearchMangaRequest,
+  GetMangaByIdRequest,
 }

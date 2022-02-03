@@ -10,6 +10,9 @@ export const getters: GetterTree<GettersTypes, IRootState> &
   getAllManga: (state: State) => {
     return state.mangas || [];
   },
+  getManga: (state: State) => (mangaId: string) => {
+    return state.mangas?.find(manga => mangaId === manga.id) || state.manga
+  },
   getSearchResult: (state: State) => {
     return state.resultSearch || [];
   },

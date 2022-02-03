@@ -1,28 +1,22 @@
-import { MangaController } from "./Manga/MangaController";
-import { AnimeController } from "./Anime/AnimeController";
-import { ChapterController } from "./Scan/Chapters/ChapterController";
-import { PageController } from "./Scan/Pages/PageController";
-import { AnimeFactory } from "./Anime/AnimeFactory";
-import { AnimeApi } from "../infrastructure/Anime/AnimeApi";
-import { ChapterFactory } from "./Scan/Chapters/ChapterFactory";
-import { AnimeFakeApi } from "../infrastructure/Anime/AnimeFakeApi";
-import { PageFactory } from "./Scan/Pages/PageFactory";
-import { ScanMangaDexApi } from "../../infrastructure/manga-api/MangaDex/ScanMangaDexApi";
-import { MangaFactory } from "./Manga/MangaFactory";
-import { MangaApiMangaDex } from "../../infrastructure/manga-api/MangaDex/MangaApiMangaDex";
-import { MangaApi, MangaFakeApi } from "../../frontend/infrastructure";
+import { MangaController } from "./manga/MangaController";
+import { AnimeController } from "./anime/AnimeController";
+import { ChapterController } from "./scan/chapters/ChapterController";
+import { PageController } from "./scan/pages/PageController";
+import { AnimeFactory } from "./anime/AnimeFactory";
+import { ChapterFactory } from "./scan/chapters/ChapterFactory";
+import { PageFactory } from "./scan/pages/PageFactory";
+import { ScanMangaDexApi } from "../../infrastructure/manga-api/mangaDex/ScanMangaDexApi";
+import { MangaFactory } from "./manga/MangaFactory";
+import { MangaApiMangaDex } from "../../infrastructure/manga-api/mangaDex/MangaApiMangaDex";
+import { AnilistApi } from "../../infrastructure/manga-api/anilist/AnilistApi";
 
-export const animeApi = new AnimeApi();
+export const animeApi = new AnilistApi();
 export const scanMangadexApi = new ScanMangaDexApi();
 export const mangadexApi = new MangaApiMangaDex();
-export const animeFakeApi = new AnimeFakeApi(animeApi);
-export const animeFactory = new AnimeFactory(animeFakeApi);
+export const animeFactory = new AnimeFactory(animeApi);
 export const chapterFactory = new ChapterFactory(scanMangadexApi);
 export const pageFactory = new PageFactory(scanMangadexApi);
-
 export const mangaFactory = new MangaFactory(mangadexApi);
-export const mangaApi = new MangaApi();
-export const mangaFakeApi = new MangaFakeApi(mangaApi);
 
 export {
     MangaController,

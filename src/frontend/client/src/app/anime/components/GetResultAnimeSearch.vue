@@ -4,7 +4,7 @@
       v-for="anime in store.getters.getSearchResult"
       :key="anime.id"
       :to="{ name: 'MangaDetail', params: { id: anime.id } }"
-      @click="store.dispatch(AllActionTypes.CLOSE_SEARCH_ANIME, mangaFactory)"
+      @click="store.dispatch(AllActionTypes.CLOSE_SEARCH_MANGA, mangaFactory)"
       class="hover:shadow-2xl w-50"
     >
       <div

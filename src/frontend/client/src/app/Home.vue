@@ -1,7 +1,7 @@
 <template>
-  <GetAllAnimeView />
+  <GetAllManga to-name-page="MangaDetail" />
 </template>
 
 <script setup lang="ts">
-import GetAllAnimeView from "./anime/components/GetAllAnimeView.vue";
+import GetAllManga from "./manga/components/GetAllManga.vue";
 </script>

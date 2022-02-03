@@ -38,14 +38,14 @@ const viewModel = ref(manga.viewModel);
 
 watch(search, (searched, prevSearched) => {
   if (searched === '') {
-    store.dispatch(AllActionTypes.CLOSE_SEARCH_ANIME, manga);
+    store.dispatch(AllActionTypes.CLOSE_SEARCH_MANGA, manga);
   } else if (searched !== prevSearched) {
-    store.dispatch(AllActionTypes.SEARCH_ANIME, {searched, factory: manga});
-    store.dispatch(AllActionTypes.OPEN_SEARCH_ANIME, manga);
+    store.dispatch(AllActionTypes.SEARCH_MANGA, {searched, factory: manga});
+    store.dispatch(AllActionTypes.OPEN_SEARCH_MANGA, manga);
   }
 });
 
 onMounted(() => {
-  store.dispatch(AllActionTypes.OPEN_SEARCH_ANIME, manga);
+  store.dispatch(AllActionTypes.OPEN_SEARCH_MANGA, manga);
 })
 </script>

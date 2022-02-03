@@ -22,7 +22,7 @@
     </nav>
     <GetResultAnimeSearchVue />
   </div>
-  <router-view class="bg-black" />
+  <router-view />
 </div>
 </template>
 
@@ -42,7 +42,7 @@ import GetResultAnimeSearchVue from './app/anime/components/GetResultAnimeSearch
 }
 
 body {
-  background-color: black;
+  background-color: rgb(90, 90, 90);
 }
 
 .card-bg {
