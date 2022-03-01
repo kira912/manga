@@ -8,15 +8,20 @@
     ></div>
     <h2 class="text-center text-white text-xl font-semibold">Loading...</h2>
     <p class="w-1/3 text-center text-white">
-      This may take a few seconds, please don't close this page.
+      This may take a few seconds, please don't close this page or follow this link
     </p>
+		<a class="text-center text-white text-xl font-semibold" target="_blank" :href="store.getters.getChapterViewerUrl(route.params.bookId)"> {{ store.getters.getChapterViewerUrl(route.params.bookId) }} </a>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
+const route = useRoute();
+console.log();
+
 </script>
 
 <style scoped>

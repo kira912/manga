@@ -1,6 +1,7 @@
 import { Entity } from "../../../../core/domain/Entity";
 import { UniqueEntityId } from "../../../../core/domain/UniqueEntityId";
 import { Result } from "../../../../core/logic/Result";
+import { ChapterExternalUrl } from "./ChapterExtenalUrl";
 import { ChapterExternalViewer } from "./ChapterExternalViewer";
 import { ChapterName } from "./ChapterName";
 import { ChapterNumber } from "./ChapterNumber";
@@ -10,6 +11,7 @@ interface ChapterProps {
   name: ChapterName;
   number: ChapterNumber;
   externalViewer: ChapterExternalViewer;
+  externalUrl: ChapterExternalUrl;
   pages: Page[];
 }
 
@@ -28,6 +30,10 @@ export class Chapter extends Entity<ChapterProps> {
 
   get externalViewer(): ChapterExternalViewer {
     return this.props.externalViewer;
+  }
+
+  get externalUrl(): ChapterExternalUrl {
+    return this.props.externalUrl;
   }
 
   public addPage(page: Page): void {

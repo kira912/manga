@@ -23,8 +23,7 @@ export class ChapterUIPresenter
 
   private updateChapterViewModel() {
     this.viewModel.chapters = this.chapters.map(chapter => {
-      return new ChapterViewModel(chapter.id.toString(), chapter.name.value, chapter.number.value, chapter.externalViewer.value);
-
+      return new ChapterViewModel(chapter.id.toString(), chapter.name.value, chapter.number.value, chapter.externalViewer.value, chapter.externalUrl.props.url);
     })
   }
 }

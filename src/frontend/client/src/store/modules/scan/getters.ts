@@ -18,5 +18,16 @@ GettersTypes = {
   },
   getChapterViewModel: (state: State) => {
     return state.viewModel;
+  },
+  getChapterViewerUrl: (state: State) => (chapterId: string): string|null => {
+    const chapter = state.chapters.find(chapter => { return chapter.viewerId === chapterId });
+
+    console.log(chapter);
+    
+    if (typeof chapter === 'undefined') {
+      return null;
+    }
+
+    return chapter.viewerUrl;
   }
 };

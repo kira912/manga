@@ -17,7 +17,7 @@ onBeforeMount(() => {
   store.dispatch(AllActionTypes.GET_SCAN_CHAPTERS, route.params.id);
 })
 
-onUnmounted(() => {
-  store.dispatch(AllActionTypes.GET_CLEAR_CHAPTERS);
-})
+// onUnmounted(() => {
+//   store.dispatch(AllActionTypes.GET_CLEAR_CHAPTERS);
+// })
 </script>

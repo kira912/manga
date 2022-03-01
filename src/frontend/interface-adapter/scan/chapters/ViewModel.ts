@@ -3,7 +3,8 @@ export class ChapterViewModel {
     public readonly id: string,
     public readonly name: string,
     public readonly chapter: string,
-    public readonly viewerId: string
+    public readonly viewerId: string,
+    public readonly viewerUrl: string,
   ) { }
 }
 

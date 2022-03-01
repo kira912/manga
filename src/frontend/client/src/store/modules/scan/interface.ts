@@ -17,6 +17,7 @@ export interface GettersTypes {
   getChapterPages(state: State): ChapterPagesViewModel[];
   haveChapters(state: State): boolean;
   getChapterViewModel(state: State): ScanViewModel;
+  getChapterViewerUrl(state: State): string|null;
 }
 
 export type MutationsTypes<S = State> = {

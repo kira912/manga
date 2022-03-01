@@ -10,6 +10,7 @@ import {
   getBlobUrl,
   extractUrls,
 } from './Utils/MangaDexBlobUtils';
+import { ChapterExternalUrl } from '../../../manga/domain/scan/entity/ChapterExtenalUrl';
 
 export class ScanMangaDexApi
   extends MangadexApiRequester
@@ -42,6 +43,7 @@ export class ScanMangaDexApi
         name: ChapterName.create(data.attributes.title).getValue(),
         number: ChapterNumber.create(data.attributes.chapter).getValue(),
         externalViewer: ChapterExternalViewer.create(viewerId).getValue(),
+        externalUrl: ChapterExternalUrl.create(data.attributes.externalUrl).getValue(),
         pages: []
       });
 
