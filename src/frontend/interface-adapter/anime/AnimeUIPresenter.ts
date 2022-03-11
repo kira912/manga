@@ -48,10 +48,10 @@ export class AnimeUIPresenter
   private updateAnimeEpisodeViewModel() {
     this.viewModel.episodes = this.episodes.map((episode) => {
       return new AnimeEpisodesViewModel(
-        episode.name,
-        episode.site,
-        episode.url,
-        episode.image,
+        episode.name.value,
+        episode.site.value,
+        episode.url.value,
+        episode.image.value,
       );
     });
   }

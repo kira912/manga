@@ -1,7 +1,7 @@
 import { MutationTree } from "vuex";
 import { MutationTypes } from "./mutation-types";
 import { MutationsTypes, State } from "./interface";
-import { AnimeEpisodesViewModel, AnimeSearchResultViewModel, AnimeViewModel } from "clean-archi-manga/frontend/interface-adapter/Anime/ViewModel";
+import { AnimeEpisodesViewModel, AnimeViewModel } from "../../../../../interface-adapter/anime/ViewModel";
 
 export const mutations: MutationTree<State> &
   MutationsTypes = {
@@ -10,5 +10,8 @@ export const mutations: MutationTree<State> &
   },
   [MutationTypes.SET_ANIME_EPISODES](state: State, payload: AnimeEpisodesViewModel[]) {
     state.episodes = payload;
+  },
+  [MutationTypes.SET_NEW_ANIME_LIST_PAGE](state: State, payload: number) {
+    state.currentListPage = payload;
   },
 };

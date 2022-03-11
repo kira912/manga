@@ -8,7 +8,6 @@ import { EpisodeSite } from "./EpisodeSite";
 import { EpisodeUrl } from "./EpisodeUrl";
 
 interface EpisodeProps {
-  externalId: EpisodeExternalId;
   name: EpisodeName;
   site: EpisodeSite;
   url: EpisodeUrl;
@@ -18,10 +17,6 @@ interface EpisodeProps {
 export class Episode extends Entity<EpisodeProps> {
   get id(): UniqueEntityId {
     return this._id;
-  }
-
-  get externalId(): EpisodeExternalId {
-    return this.props.externalId;
   }
 
   get name(): EpisodeName {

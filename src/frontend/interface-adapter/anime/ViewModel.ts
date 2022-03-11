@@ -9,7 +9,7 @@ export class AnimeViewModel {
 
 export class AnimeEpisodesViewModel {
   constructor(
-    public readonly title: string,
+    public readonly name: string,
     public readonly site: string,
     public readonly url: string,
     public readonly image: string,

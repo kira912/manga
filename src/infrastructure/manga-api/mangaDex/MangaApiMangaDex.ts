@@ -25,11 +25,16 @@ export class MangaApiMangaDex extends MangadexApiRequester implements MangaApiIn
 
     for (const data of response.data) {
       const covertArtRelation = data.relationships.filter(element => element.type === 'cover_art')[0];
+      let image = 'no-image';
+
+      if (typeof covertArtRelation !== 'undefined') {
+        image = `${this.baseUriCover}/${data.id}/${covertArtRelation.attributes.fileName}`;
+      }
       
       const mangaOrError = Manga.create({
         description: MangaDescription.create(data.attributes.description.en).getValue(),
         name: MangaName.create(data.attributes.title[Object.keys(data.attributes.title)[0]]).getValue(),
-        image: MangaImage.create(`${this.baseUriCover}/${data.id}/${covertArtRelation.attributes.fileName}`).getValue(),
+        image: MangaImage.create(image).getValue(),
         originalLang: MangaOriginalLang.create(data.attributes.originalLanguage).getValue(),
         year: MangaYear.create(data.attributes.year).getValue(),
         status: MangaStatus.create(data.attributes.status).getValue(),

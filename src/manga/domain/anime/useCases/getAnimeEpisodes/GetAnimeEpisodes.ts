@@ -8,7 +8,7 @@ export class GetAnimeEpisodes {
 
   async execute(request: GetAnimeEpisodeRequest, presenter: GetAnimeEpisodesPresenterInterface) {
     const response = new GetAnimeEpisodesResponse();
-    response.episodes = await this.mangaApi.getAnimeEpisodes(request.animeId);
+    response.episodes = await this.mangaApi.getAnimeEpisodes(1, request.animeId);
     
     presenter.presentAnimeEpisodes(response);
   }

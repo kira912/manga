@@ -12,11 +12,13 @@ import { IRootState } from "../root";
 export interface State {
   animes?: AnimeViewModel[];
   episodes?: AnimeEpisodesViewModel[];
+  currentListPage?: number;
 }
 
 export interface GettersTypes {
   getAll(state: State): AnimeViewModel[];
   getAnimeEpisodes(state: State): AnimeEpisodesViewModel[];
+  getCurrentListPage(state: State): number;
 }
 
 export type MutationsTypes<S = State> = {
@@ -25,6 +27,7 @@ export type MutationsTypes<S = State> = {
     state: S,
     payload: AnimeEpisodesViewModel[]
   ): void;
+  [MutationTypes.SET_NEW_ANIME_LIST_PAGE](state: S, payload: number): void;
 };
 
 export interface ActionsTypes {
@@ -33,6 +36,7 @@ export interface ActionsTypes {
     { commit }: AugmentedActionContext,
     payload: number,
   ): void;
+  [ActionTypes.GET_NEW_ANIME_LIST_PAGE]({ commit }: AugmentedActionContext, payload: number): void;
 }
 
 export type AugmentedActionContext = {

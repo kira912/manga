@@ -13,4 +13,7 @@ export const getters: GetterTree<GettersTypes, IRootState> &
   getAnimeEpisodes: (state: State) => {
     return state.episodes || [];
   },
+  getCurrentListPage: (state: State) => {
+    return state.currentListPage;
+  }
 };

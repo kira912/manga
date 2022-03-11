@@ -14,7 +14,7 @@ export interface State {
 
 export interface GettersTypes {
   getAllManga(state: State): MangaViewModel[];
-  getManga(state: State): MangaViewModel | null;
+  getManga(state: State): MangaViewModel;
   getSearchResult(state: State): MangaSearchResultViewModel[];
   resultIsActive(state: State): boolean;
 }

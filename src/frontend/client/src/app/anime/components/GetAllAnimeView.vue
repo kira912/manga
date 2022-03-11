@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap justify-center">
     <router-link
-      v-for="anime in store.getters.getAll"
+      v-for="anime of store.getters.getAll"
       :key="anime.id"
       :to="{name: 'AnimeEpisodesDetail', params: {id: anime.id}}"
       class="h-98"
@@ -31,7 +31,7 @@ import { AllActionTypes } from "../../../store/action-types";
 const store = useStore();
 
 onBeforeMount(async () => {
-  await store.dispatch(AllActionTypes.GET_ALL_ANIME);
+  await store.dispatch(AllActionTypes.GET_ALL_ANIME, store.getters.getCurrentListPage);
 })
 
 const route = useRoute();

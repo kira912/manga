@@ -1,9 +1,13 @@
+import { EpisodeImage } from '../../../manga/domain/anime/entity/EpisodeImage';
+import { EpisodeName } from '../../../manga/domain/anime/entity/EpisodeName';
+import { EpisodeSite } from '../../../manga/domain/anime/entity/EpisodeSite';
+import { EpisodeUrl } from '../../../manga/domain/anime/entity/EpisodeUrl';
 import { Anime, Episode, AnimeApiInterface } from '../../../manga/domain';
 
 export class AnilistApi implements AnimeApiInterface {
   private baseUri = "https://graphql.anilist.co";
 
-  async getAllAnime(): Promise<Anime[]> {
+  async getAllAnime(page: number = 1): Promise<Anime[]> {
     const query = `
       query ($page: Int, $perPage: Int) {
         Page(page: $page, perPage: $perPage) {
@@ -26,9 +30,8 @@ export class AnilistApi implements AnimeApiInterface {
     `;
 
     const variables = {
-      query,
-      page: 1,
-      perPage: 3,
+      page: page,
+      perPage: 10,
     };
 
     const headers = new Headers({
@@ -39,7 +42,7 @@ export class AnilistApi implements AnimeApiInterface {
     const options = {
       method: 'POST',
       headers,
-      body: JSON.stringify(variables),
+      body: JSON.stringify({query: query, variables: variables}),
     };
 
     const result = await fetch(this.baseUri, options)
@@ -63,31 +66,34 @@ export class AnilistApi implements AnimeApiInterface {
     return animes;
   }
 
-  async getAnimeEpisodes(animeId: number): Promise<Episode[]> {
+  async getAnimeEpisodes(page: number = 1, animeId: number): Promise<Episode[]> {
     const query = `
-      query ($animeId: Int) {
-        Media(id: $animeId, type: ANIME) {
-          id
-          description
-          coverImage {
-            medium
-          }
-          title {
-            english
-          }
-          streamingEpisodes {
-            title
-            thumbnail
-            url
-            site
+      query ($animeId: Int, $page: Int, $perPage: Int) {
+        Page(page: $page, perPage: $perPage) {
+          media(id: $animeId, type: ANIME, sort: ID_DESC) {
+            id
+            description
+            coverImage {
+              medium
+            }
+            title {
+              english
+            }
+            streamingEpisodes {
+              title
+              thumbnail
+              url
+              site
+            }
           }
         }
       }
     `;
 
     const variables = {
-      query,
-      id: animeId
+      animeId,
+      page,
+      perPage: 10,
     };
 
     const headers = new Headers({
@@ -98,7 +104,7 @@ export class AnilistApi implements AnimeApiInterface {
     const options = { 
       method: 'POST',
       headers,
-      body: JSON.stringify(variables),
+      body: JSON.stringify({query, variables}),
     };
 
     const result = await fetch(this.baseUri, options);
@@ -110,15 +116,22 @@ export class AnilistApi implements AnimeApiInterface {
     const animeEpisodes: Episode[] = [];
     const response = await result.json();
 
-    console.log(response);
+    console.log(response.data.Page.media[0].streamingEpisodes.length);
 
-    for (const data of response.data.Media.streamingEpisodes) {
-      animeEpisodes.push(new Episode(
-        data.title,
-        data.site,
-        data.url,
-        data.thumbnail,
-      ));
+    for (const data of response.data.Page.media[0].streamingEpisodes) {
+      const episodeOrError = Episode.create({
+        name: EpisodeName.create(data.title).getValue(),
+        image: EpisodeImage.create(data.thumbnail).getValue(),
+        site: EpisodeSite.create(data.site).getValue(),
+        url: EpisodeUrl.create(data.url).getValue(),
+      });
+      
+      if (episodeOrError.isFailure) {
+        console.log(episodeOrError);
+        continue;
+      }
+
+      animeEpisodes.push(episodeOrError.getValue());
     }
 
     return animeEpisodes;

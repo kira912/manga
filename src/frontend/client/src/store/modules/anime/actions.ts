@@ -22,4 +22,10 @@ ActionsTypes = {
 
     commit(MutationTypes.SET_ANIME_EPISODES, anime.viewModel.episodes)
   },
+  async [ActionTypes.GET_NEW_ANIME_LIST_PAGE]({ commit }, page: number) {
+    const anime = injectStrict(AnimeKey);
+    await anime.controller.getAllAnimes(page);
+    commit(MutationTypes.SET_ALL_ANIME, anime.viewModel.animes);
+    commit(MutationTypes.SET_NEW_ANIME_LIST_PAGE, page)
+  }
 };

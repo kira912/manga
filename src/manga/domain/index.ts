@@ -31,6 +31,7 @@ export * from "./manga/useCases/MangaApiInterface";
 export * from "./manga/useCases/getAllManga/GetAllMangaPresenterInterface";
 export * from "./manga/useCases/getMangaById/GetMangaByIdPresenterInterface";
 
+import { GetAllAnimeRequest } from "./anime/useCases/getAllAnime/GetAllAnimeRequest";
 import { GetAnimeEpisodeRequest } from "./anime/useCases/getAnimeEpisodes/GetAnimeEpisodeRequest";
 import { GetScanChaptersRequest } from "./scan/useCases/getScanChapters/GetScanChaptersRequest";
 import { GetScanChapterPageRequest } from "./scan/useCases/getChapterPages/GetScanChapterPageRequest";
@@ -62,4 +63,5 @@ export {
   GetScanChapterPageRequest,
   SearchMangaRequest,
   GetMangaByIdRequest,
+  GetAllAnimeRequest
 }

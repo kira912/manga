@@ -66,7 +66,7 @@ import GetAllMangaScan from '../../scan/components/GetAllMangaScan.vue';
 const store = useStore()
 const route = useRoute()
 const viewModel = injectStrict(MangaKey).viewModel
-console.log(viewModel);
+console.log(store.getters.getManga());
 
 
 onBeforeMount(() => {

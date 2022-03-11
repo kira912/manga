@@ -4,6 +4,7 @@ import {
   GetAnimeEpisodesPresenterInterface,
   GetAllAnimePresenterInterface,
   GetAnimeEpisodeRequest,
+  GetAllAnimeRequest
 } from '../../../manga/domain';
 
 export class AnimeController {
@@ -14,8 +15,8 @@ export class AnimeController {
     private getAnimeEpisodePresenter: GetAnimeEpisodesPresenterInterface) {
   }
 
-  async getAllAnimes() {
-    await this.getAllAnime.execute(this.getAllAnimePresenter);
+  async getAllAnimes(page: number = 1) {
+    await this.getAllAnime.execute(new GetAllAnimeRequest(page), this.getAllAnimePresenter);
   }
 
   async getEpisodes(animeId: number) {

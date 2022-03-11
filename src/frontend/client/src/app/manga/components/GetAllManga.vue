@@ -17,7 +17,7 @@
         </div>
         <div class="flex flex-col p-4 h-52 self-end mt-auto">
           <h2 class="text-white text-lg font-semibold">{{ manga.name }}</h2>
-          <p class="self-end text-white">{{ manga.description.slice(0, 150) + '...'}}</p>
+          <p class="self-end text-white">{{ manga.description !== undefined ? manga.description.slice(0, 150) + '...' : ''}}</p>
         </div>
       </div>
     </router-link>
